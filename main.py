@@ -1,42 +1,32 @@
-# Basic arcade program using objects
-# Displays a white window with a blue circle in the middle
+import pygame
+import sys
+from GameDisplay import GameDisplay
+from Protagonist import Protagonist
+from Enemy import Enemy
 
-# Imports
-import arcade
-
-# Constants
-SCREEN_WIDTH = 600
-SCREEN_HEIGHT = 800
-SCREEN_TITLE = "Welcome to Arcade"
-RADIUS = 150
-
-# Classes
-class Welcome(arcade.Window):
-    """Main welcome window
-    """
+class Main:
     def __init__(self):
-        """Initialize the window
-        """
+        self.WIDTH = 800
+        self.HEIGHT = 600
+        self.display = GameDisplay(self.WIDTH, self.HEIGHT)
+        self.protagonist = Protagonist(self.WIDTH, self.HEIGHT)
+        self.enemy = Enemy(self.WIDTH, self.HEIGHT)
 
-        # Call the parent class constructor
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+    def run(self):
+        running = True
+        while running:
+            self.display.clear_screen()
 
-        # Set the background window
-        arcade.set_background_color(arcade.color.WHITE)
+            # Handle events
+            self.display.handle_events()
 
-    def on_draw(self):
-        """Called whenever you need to draw your window
-        """
+            # Display information for both protagonist and enemy
+            self.protagonist.display_info(10, 450, 20, 520)  # Example positions for protagonist's health bar and action points
+            self.enemy.display_info(300, 10, 330, 80, 380, 19)  # Example positions for enemy's health bar, enemy image, and shield
 
-        # Clear the screen and start drawing
-        arcade.start_render()
+            # Update display
+            pygame.display.flip()
 
-        # Draw a blue circle
-        arcade.draw_circle_filled(
-            SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, RADIUS, arcade.color.BLUE
-        )
-
-# Main code entry point
 if __name__ == "__main__":
-    app = Welcome()
-    arcade.run()
+    game = Main()
+    game.run()
