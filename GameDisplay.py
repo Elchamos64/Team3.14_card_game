@@ -23,6 +23,13 @@ class GameDisplay:
         self.grey_heart_image = pygame.transform.scale(self.grey_heart_image, (self.grey_heart_image.get_width() * 4.5, self.grey_heart_image.get_height()* 4.5))
         self.red_heart_image = pygame.transform.scale(self.red_heart_image, (self.red_heart_image.get_width() * 4.5, self.red_heart_image.get_height() * 4.5))
 
+        # Define card areas
+        self.card_areas = {
+            "attack": pygame.Rect(50, 500, 100, 50),
+            "heal": pygame.Rect(200, 500, 100, 50),
+            "block": pygame.Rect(350, 500, 100, 50),
+        }
+
     def clear_screen(self):
         self.screen.fill((255, 255, 255))  # Clear screen to white
 
@@ -51,6 +58,12 @@ class GameDisplay:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                # Handle card areas
+                for card, area in self.card_areas.items():
+                    if area.collidepoint(mouse_pos):
+                        return card  # Return the card clicked
 
     def update_display(self):
         pygame.display.flip()
@@ -63,3 +76,7 @@ class GameDisplay:
 
     def get_height(self):
         return self.height
+    
+    def draw_card_areas(self):
+        for area in self.card_areas.values():
+            pygame.draw.rect(self.screen, (0, 0, 0), area, 2)  # Draw card areas as rectangles
