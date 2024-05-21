@@ -14,6 +14,11 @@ class Main:
         self.enemy = Enemy(self.WIDTH, self.HEIGHT)
         self.actions = ["attack", "heal", "block"]
 
+    def end_turn(self):
+        if self.protagonist.current_action_points < self.protagonist.max_action_points:
+            self.protagonist.current_action_points = self.protagonist.max_action_points
+        self.enemy_action()
+
     def player_action(self, action):
         if action == "attack":
             damage = random.randint(5, 15)
@@ -25,8 +30,10 @@ class Main:
             print(f"Player heals for {heal_amount} health!")
         elif action == "block":
             block_points = random.randint(5, 10)
-            self.protagonist.action_points += block_points
+            self.protagonist.current_action_points += block_points
             print(f"Player blocks, gaining {block_points} action points!")
+        elif action == "end_turn": 
+            self.end_turn()
     
     def enemy_action(self):
         action = random.choice(self.actions)
@@ -61,7 +68,9 @@ class Main:
             action = self.display.handle_events()
             if action:  # If an action was returned
                 self.player_action(action)
-                self.enemy_action()  # Enemy's turn
+
+            # If turn is ended, reset action points, and enemy attacks
+            # self.end_turn()
 
             # Check for game over
             if self.check_game_over():
@@ -73,6 +82,9 @@ class Main:
 
             # Draw card areas
             self.display.draw_card_areas()
+
+            # Draw buttons
+            self.display.draw_button_areas()
 
             # Update display
             pygame.display.flip()

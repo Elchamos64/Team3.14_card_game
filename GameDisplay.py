@@ -23,11 +23,24 @@ class GameDisplay:
         self.grey_heart_image = pygame.transform.scale(self.grey_heart_image, (self.grey_heart_image.get_width() * 4.5, self.grey_heart_image.get_height()* 4.5))
         self.red_heart_image = pygame.transform.scale(self.red_heart_image, (self.red_heart_image.get_width() * 4.5, self.red_heart_image.get_height() * 4.5))
 
+        # Load buttons
+        self.end_turn_button = pygame.image.load("Images/Display/EndTurn.png")
+        self.end_turn_button = pygame.transform.scale(self.end_turn_button, (self.end_turn_button.get_width() * 3, self.end_turn_button.get_height() * 3))
+
+
         # Define card areas
         self.card_areas = {
             "attack": pygame.Rect(50, 500, 100, 50),
             "heal": pygame.Rect(200, 500, 100, 50),
             "block": pygame.Rect(350, 500, 100, 50),
+        }
+
+        # Define button areas
+        self.button_areas = {
+            self.end_turn_button: pygame.Rect(600, 500, 144, 45),
+        }
+        self.button_types = {
+            "end_turn": pygame.Rect(600, 500, 144, 45),
         }
 
     def clear_screen(self):
@@ -64,6 +77,11 @@ class GameDisplay:
                 for card, area in self.card_areas.items():
                     if area.collidepoint(mouse_pos):
                         return card  # Return the card clicked
+                # Handle End turn
+                for button, area in self.button_types.items():
+                      if area.collidepoint(mouse_pos):
+                        return button # Return the button clicked
+            
 
     def update_display(self):
         pygame.display.flip()
@@ -80,3 +98,7 @@ class GameDisplay:
     def draw_card_areas(self):
         for area in self.card_areas.values():
             pygame.draw.rect(self.screen, (0, 0, 0), area, 2)  # Draw card areas as rectangles
+
+    def draw_button_areas(self):
+        for key in self.button_areas.keys():
+            self.screen.blit(key, (self.button_areas.get(key).left, self.button_areas.get(key).top))

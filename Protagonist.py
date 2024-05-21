@@ -8,7 +8,8 @@ class Protagonist(GameDisplay):
         # Additional attributes for Protagonist
         self.max_health = 100
         self.current_health = 50
-        self.action_points = 10
+        self.current_action_points = 10
+        self.max_action_points = 10
 
         # Load action point image and scale it
         self.action_point_image = pygame.image.load("Images/Display/ActionPoints.png")
@@ -36,7 +37,7 @@ class Protagonist(GameDisplay):
         self.screen.blit(self.action_point_image, (action_point_x, action_point_y))
 
         # Render action point text
-        action_point_text = self.font.render(str(self.action_points), True, (0, 0, 0))  # Black color
+        action_point_text = self.font.render(str(self.current_action_points), True, (0, 0, 0))  # Black color
         text_rect = action_point_text.get_rect(center=(action_point_x + self.action_point_image.get_width() // 2, action_point_y + self.action_point_image.get_height() // 2))
 
         # Blit action point text
