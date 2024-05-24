@@ -23,6 +23,8 @@ class Main:
         if action == "attack":
             damage = random.randint(5, 15)
             self.enemy.current_health -= damage
+            if damage > self.enemy.current_health:
+                self.enemy.current_health = 0
             print(f"Player attacks for {damage} damage!")
         elif action == "heal":
             heal_amount = random.randint(10, 20)
@@ -40,6 +42,8 @@ class Main:
         if action == "attack":
             damage = random.randint(5, 15)
             self.protagonist.current_health -= damage
+            if damage > self.protagonist.current_health:
+                self.protagonist.current_health = 0
             print(f"Enemy attacks for {damage} damage!")
         elif action == "heal":
             heal_amount = random.randint(5, 10)
