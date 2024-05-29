@@ -28,7 +28,7 @@ class GameDisplay:
         self.end_turn_button = pygame.transform.scale(self.end_turn_button, (self.end_turn_button.get_width() * 3, self.end_turn_button.get_height() * 3))
 
         # Load shield image and scale it
-        self.shield_image = pygame.image.load("Images/Enemies/Shield.png")
+        self.shield_image = pygame.image.load("Images/Display/Shield.png")
         self.shield_image = pygame.transform.scale(self.shield_image, (self.shield_image.get_width() * 4, self.shield_image.get_height() * 4))
 
         # Load card holster background
