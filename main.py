@@ -35,7 +35,7 @@ class Main:
                 block_points = random.randint(5, 10)
                 self.protagonist.block_points += block_points
                 print(f"Player blocks, gaining {block_points} block points!")
-            
+
             # Reduce action points after performing an action
             self.protagonist.reduce_action_points()
             

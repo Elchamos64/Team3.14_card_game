@@ -27,15 +27,19 @@ class GameDisplay:
         self.end_turn_button = pygame.image.load("Images/Display/EndTurn.png")
         self.end_turn_button = pygame.transform.scale(self.end_turn_button, (self.end_turn_button.get_width() * 3, self.end_turn_button.get_height() * 3))
 
-        # Load and scale shield image
+        # Load shield image and scale it
         self.shield_image = pygame.image.load("Images/Enemies/Shield.png")
-        self.shield_image = pygame.transform.scale(self.shield_image, (self.shield_image.get_width() * 4, self.shield_image.get_height() * 4))  # Adjust the size as needed
+        self.shield_image = pygame.transform.scale(self.shield_image, (self.shield_image.get_width() * 4, self.shield_image.get_height() * 4))
+
+        # Load card holster background
+        self.card_holster_image = pygame.image.load("Images/Display/CardHolster.png")
+        self.card_holster_image = pygame.transform.scale(self.card_holster_image, (420, 100))  # Adjust size as needed
 
         # Define card areas
         self.card_areas = {
-            "attack": pygame.Rect(50, 500, 100, 50),
-            "heal": pygame.Rect(200, 500, 100, 50),
-            "block": pygame.Rect(350, 500, 100, 50),
+            "attack": pygame.Rect(160, 500, 100, 50),
+            "heal": pygame.Rect(310, 500, 100, 50),
+            "block": pygame.Rect(460, 500, 100, 50),
         }
 
         # Define button areas
@@ -69,17 +73,6 @@ class GameDisplay:
         # Reset clipping region
         self.screen.set_clip(None)
 
-    def draw_shield_and_block_points(self, shield_x, shield_y, block_points):
-        # Draw the shield image
-        self.screen.blit(self.shield_image, (shield_x, shield_y))
-
-        # Render block points text
-        block_points_text = self.font.render(str(block_points), True, (0, 0, 0))  # Black color
-        text_rect = block_points_text.get_rect(center=(shield_x + self.shield_image.get_width() // 2, shield_y + self.shield_image.get_height() // 2))
-
-        # Blit block points text
-        self.screen.blit(block_points_text, text_rect)
-
     def handle_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -94,7 +87,7 @@ class GameDisplay:
                 # Handle End turn
                 for button, area in self.button_types.items():
                     if area.collidepoint(mouse_pos):
-                        return button  # Return the button clicked
+                        return button # Return the button clicked
 
     def update_display(self):
         pygame.display.flip()
@@ -109,9 +102,22 @@ class GameDisplay:
         return self.height
     
     def draw_card_areas(self):
+        # Draw card holster background
+        self.screen.blit(self.card_holster_image, (150, 480))  # Position the background
         for area in self.card_areas.values():
             pygame.draw.rect(self.screen, (0, 0, 0), area, 2)  # Draw card areas as rectangles
 
     def draw_button_areas(self):
         for key in self.button_areas.keys():
             self.screen.blit(key, (self.button_areas.get(key).left, self.button_areas.get(key).top))
+
+    def draw_shield_and_block_points(self, shield_x, shield_y, block_points):
+        # Draw the shield image
+        self.screen.blit(self.shield_image, (shield_x, shield_y))
+
+        # Render block points text
+        block_points_text = self.font.render(str(block_points), True, (0, 0, 0))  # Black color
+        text_rect = block_points_text.get_rect(center=(shield_x + self.shield_image.get_width() // 2, shield_y + self.shield_image.get_height() // 2))
+
+        # Blit block points text
+        self.screen.blit(block_points_text, text_rect)
