@@ -1,4 +1,5 @@
 import random
+import Card
 
 class Deck:
     def __init__(self, all_cards):
@@ -50,14 +51,6 @@ class Deck:
         print(f"Deck: {len(self.deck)} cards")
         print(f"Hand: {len(self.hand)} cards")
         print(f"Discard: {len(self.discard)} cards")
-
-# Assuming the Card class and some example cards are defined like this:
-class Card:
-    def __init__(self, name):
-        self.name = name
-
-    def __repr__(self):
-        return self.name
 
 # Example usage:
 if __name__ == "__main__":
