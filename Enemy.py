@@ -14,10 +14,6 @@ class Enemy(GameDisplay):
         self.enemy_image = pygame.image.load("Images/Enemies/MilkJugSteve.png")  # Replace with your actual enemy image file
         self.enemy_image = pygame.transform.scale(self.enemy_image, (self.enemy_image.get_width() * 3, self.enemy_image.get_height() * 3))  # Adjust the size as needed
 
-        # Load shield image and scale it
-        self.shield_image = pygame.image.load("Images/Enemies/Shield.png")  # Replace with your actual shield image file
-        self.shield_image = pygame.transform.scale(self.shield_image, (self.shield_image.get_width() * 4, self.shield_image.get_height() * 4))  # Adjust the size as needed
-
     def display_info(self, health_bar_x, health_bar_y, enemy_x, enemy_y, shield_x, shield_y):
         # Draw health bar
         health_bar_width = 200
@@ -36,15 +32,4 @@ class Enemy(GameDisplay):
         self.screen.blit(self.enemy_image, (enemy_x, enemy_y))
 
         # Draw the shield and block points
-        self.draw_shield_and_block_points(shield_x, shield_y)
-
-    def draw_shield_and_block_points(self, shield_x, shield_y):
-        # Draw the shield image
-        self.screen.blit(self.shield_image, (shield_x, shield_y))
-
-        # Render block points text
-        block_points_text = self.font.render(str(self.block_points), True, (0, 0, 0))  # Black color
-        text_rect = block_points_text.get_rect(center=(shield_x + self.shield_image.get_width() // 2, shield_y + self.shield_image.get_height() // 2))
-
-        # Blit block points text
-        self.screen.blit(block_points_text, text_rect)
+        self.draw_shield_and_block_points(shield_x, shield_y, self.block_points)

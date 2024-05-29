@@ -20,23 +20,29 @@ class Main:
         self.enemy_action()
 
     def player_action(self, action):
-        if action == "attack":
-            damage = random.randint(5, 15)
-            self.enemy.current_health -= damage
-            if self.enemy.current_health < 0:
-                self.enemy.current_health = 0
-            print(f"Player attacks for {damage} damage!")
-        elif action == "heal":
-            heal_amount = random.randint(10, 20)
-            self.protagonist.current_health = min(self.protagonist.max_health, self.protagonist.current_health + heal_amount)
-            print(f"Player heals for {heal_amount} health!")
-        elif action == "block":
-            block_points = random.randint(5, 10)
-            self.protagonist.current_action_points += block_points
-            print(f"Player blocks, gaining {block_points} action points!")
-        elif action == "end_turn": 
-            self.end_turn()
-    
+        if self.protagonist.current_action_points > 0:
+            if action == "attack":
+                damage = random.randint(5, 15)
+                self.enemy.current_health -= damage
+                if self.enemy.current_health < 0:
+                    self.enemy.current_health = 0
+                print(f"Player attacks for {damage} damage!")
+            elif action == "heal":
+                heal_amount = random.randint(10, 20)
+                self.protagonist.current_health = min(self.protagonist.max_health, self.protagonist.current_health + heal_amount)
+                print(f"Player heals for {heal_amount} health!")
+            elif action == "block":
+                block_points = random.randint(5, 10)
+                self.protagonist.block_points += block_points
+                print(f"Player blocks, gaining {block_points} block points!")
+            
+            # Reduce action points after performing an action
+            self.protagonist.reduce_action_points()
+            
+            # If action is end_turn, reset action points
+            if action == "end_turn": 
+                self.end_turn()
+
     def enemy_action(self):
         action = random.choice(self.actions)
         if action == "attack":
@@ -73,16 +79,13 @@ class Main:
             if action:  # If an action was returned
                 self.player_action(action)
 
-            # If turn is ended, reset action points, and enemy attacks
-            # self.end_turn()
-
             # Check for game over
             if self.check_game_over():
                 running = False
 
             # Display information for both protagonist and enemy
-            self.protagonist.display_info(10, 450, 20, 520)  # Example positions for protagonist's health bar and action points
-            self.enemy.display_info(300, 10, 330, 80, 380, 19)  # Example positions for enemy's health bar, enemy image, and shield
+            self.protagonist.display_info(40, 450, 20, 520, 70, 515)  # Updated positions for protagonist's health bar, action points, and shield
+            self.enemy.display_info(300, 10, 330, 80, 380, 18)  # Updated positions for enemy's health bar, enemy image, and shield
 
             # Draw card areas
             self.display.draw_card_areas()

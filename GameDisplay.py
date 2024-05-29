@@ -20,13 +20,16 @@ class GameDisplay:
         # Load heart images and scale them down
         self.grey_heart_image = pygame.image.load("Images/Display/UnfilledHeart.png")
         self.red_heart_image = pygame.image.load("Images/Display/Heart.png")
-        self.grey_heart_image = pygame.transform.scale(self.grey_heart_image, (self.grey_heart_image.get_width() * 4.5, self.grey_heart_image.get_height()* 4.5))
+        self.grey_heart_image = pygame.transform.scale(self.grey_heart_image, (self.grey_heart_image.get_width() * 4.5, self.grey_heart_image.get_height() * 4.5))
         self.red_heart_image = pygame.transform.scale(self.red_heart_image, (self.red_heart_image.get_width() * 4.5, self.red_heart_image.get_height() * 4.5))
 
         # Load buttons
         self.end_turn_button = pygame.image.load("Images/Display/EndTurn.png")
         self.end_turn_button = pygame.transform.scale(self.end_turn_button, (self.end_turn_button.get_width() * 3, self.end_turn_button.get_height() * 3))
 
+        # Load and scale shield image
+        self.shield_image = pygame.image.load("Images/Enemies/Shield.png")
+        self.shield_image = pygame.transform.scale(self.shield_image, (self.shield_image.get_width() * 4, self.shield_image.get_height() * 4))  # Adjust the size as needed
 
         # Define card areas
         self.card_areas = {
@@ -66,6 +69,17 @@ class GameDisplay:
         # Reset clipping region
         self.screen.set_clip(None)
 
+    def draw_shield_and_block_points(self, shield_x, shield_y, block_points):
+        # Draw the shield image
+        self.screen.blit(self.shield_image, (shield_x, shield_y))
+
+        # Render block points text
+        block_points_text = self.font.render(str(block_points), True, (0, 0, 0))  # Black color
+        text_rect = block_points_text.get_rect(center=(shield_x + self.shield_image.get_width() // 2, shield_y + self.shield_image.get_height() // 2))
+
+        # Blit block points text
+        self.screen.blit(block_points_text, text_rect)
+
     def handle_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -79,9 +93,8 @@ class GameDisplay:
                         return card  # Return the card clicked
                 # Handle End turn
                 for button, area in self.button_types.items():
-                      if area.collidepoint(mouse_pos):
-                        return button # Return the button clicked
-            
+                    if area.collidepoint(mouse_pos):
+                        return button  # Return the button clicked
 
     def update_display(self):
         pygame.display.flip()
