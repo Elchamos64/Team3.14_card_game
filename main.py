@@ -4,6 +4,7 @@ import random
 from GameDisplay import GameDisplay
 from Protagonist import Protagonist
 from Enemy import Enemy
+from Card import Card
 
 class Main:
     def __init__(self):
@@ -12,6 +13,7 @@ class Main:
         self.display = GameDisplay(self.WIDTH, self.HEIGHT)
         self.protagonist = Protagonist(self.WIDTH, self.HEIGHT)
         self.enemy = Enemy(self.WIDTH, self.HEIGHT)
+        self.card = Card()
         self.actions = ["attack", "heal", "block"]
 
     def end_turn(self):
@@ -20,30 +22,39 @@ class Main:
         self.enemy_action()
 
     def player_action(self, action):
-        if self.protagonist.current_action_points > 0:
-            if action == "attack":
-                damage = random.randint(5, 15)
-                self.enemy.current_health -= damage
-                if self.enemy.current_health < 0:
-                    self.enemy.current_health = 0
-                print(f"Player attacks for {damage} damage!")
-            elif action == "heal":
-                heal_amount = random.randint(10, 20)
-                self.protagonist.current_health = min(self.protagonist.max_health, self.protagonist.current_health + heal_amount)
-                print(f"Player heals for {heal_amount} health!")
-            elif action == "block":
-                block_points = random.randint(5, 10)
-                self.protagonist.block_points += block_points
-                print(f"Player blocks, gaining {block_points} block points!")
+        #Old code for referencing
+        # if self.protagonist.current_action_points > 0:
+        #     if action == "attack":
+        #         damage = random.randint(5, 15)
+        #         self.enemy.current_health -= damage
+        #         if self.enemy.current_health < 0:
+        #             self.enemy.current_health = 0
+        #         print(f"Player attacks for {damage} damage!")
+        #     elif action == "heal":
+        #         heal_amount = random.randint(10, 20)
+        #         self.protagonist.current_health = min(self.protagonist.max_health, self.protagonist.current_health + heal_amount)
+        #         print(f"Player heals for {heal_amount} health!")
+        #     elif action == "block":
+        #         block_points = random.randint(5, 10)
+        #         self.protagonist.block_points += block_points
+        #         print(f"Player blocks, gaining {block_points} block points!")
 
             # Reduce action points after performing an action
-            self.protagonist.reduce_action_points()
+            # self.protagonist.reduce_action_points()
+        if self.protagonist.current_action_points > 0:
+            if action == "kick":
+                self.card.attack(1,3,2)
+            elif action == "deep_breath":
+                self.card.heal(3,6,3)
+            if action == "hands_up":
+                self.card.block(2,2,1)
             
             # If action is end_turn, reset action points
             if action == "end_turn": 
                 self.end_turn()
 
     def enemy_action(self):
+        #Move to another class, add multiple actions and bigger actions based on amount of turns
         action = random.choice(self.actions)
         if action == "attack":
             damage = random.randint(5, 15)

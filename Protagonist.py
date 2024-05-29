@@ -50,3 +50,5 @@ class Protagonist(GameDisplay):
     def reduce_action_points(self):
         if self.current_action_points > 0:
             self.current_action_points -= 1
+    
+    

@@ -37,10 +37,11 @@ class GameDisplay:
 
         # Define card areas
         self.card_areas = {
-            "attack": pygame.Rect(160, 500, 100, 50),
-            "heal": pygame.Rect(310, 500, 100, 50),
-            "block": pygame.Rect(460, 500, 100, 50),
+            "kick": pygame.Rect(50, 500, 100, 150),
+            "hands_up": pygame.Rect(200, 500, 100, 150),
+            "deep_breath": pygame.Rect(350, 500, 100, 150),
         }
+
 
         # Define button areas
         self.button_areas = {
