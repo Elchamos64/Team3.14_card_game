@@ -5,14 +5,16 @@ import random
 class Card:
     def __init__(self, iName, iPicture, iText):
         super().__init__()
-
+        pygame.font.init()
         #define card 
         self.name = iName
         self.picture = pygame.image.load(iPicture)
         self.text = iText
         self.cardfront = pygame.image.load("Images\Display\CardFront.png")
-        self. cardfront = pygame.transform.scale(self.cardfront, (65, 85))
-        
+        self.cardfront = pygame.transform.scale(self.cardfront, (65, 85))
+        self.font = pygame.font.SysFont(None, 12)
+        self.nameFont = pygame.font.SysFont(None, 20)
+
         def run():
             pass
         
@@ -56,3 +58,7 @@ class Card:
 
     def display(self, screen, x, y):
         screen.blit(self.cardfront, (x, y, 100, 130))   
+        block_points_text = self.font.render(str(self.text), True, (0, 0, 0))  # Black color
+        screen.blit(block_points_text, (x, y+5))
+        block_points_name = self.nameFont.render(str(self.name), True, (0, 0, 0))  # Black color
+        screen.blit(block_points_name, (x, y+75))
