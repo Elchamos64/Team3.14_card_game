@@ -1,6 +1,7 @@
 import pygame
 import sys
-
+from Protagonist import Protagonist
+import random
 class Card:
     def __init__(self):
         super().__init__()
@@ -15,15 +16,28 @@ class Card:
         self.hands_up = pygame.transform.scale(self.hands_up, (100, 150))
         self.deep_breath = pygame.transform.scale(self.deep_breath, (100, 150))
 
-    def attack(lowNum, highNum, APcost):
-        #TODO implement attack function
-        pass
+    def attack(self, lowNum, highNum, APcost):
+        damage = random.randint(5, 15)
+        self.enemy.current_health -= damage
+        if self.enemy.current_health < 0:
+            self.enemy.current_health = 0
+        print(f"Player attacks for {damage} damage!")
+        
+        # Reduce action points after performing an action
+        self.protagonist.reduce_action_points()
 
-    def heal(lowNum, highNum, APcost):
-        #TODO implement heal function
-        pass
+    def heal(self,lowNum, highNum, APcost):
+        heal_amount = random.randint(10, 20)
+        self.protagonist.current_health = min(self.protagonist.max_health, self.protagonist.current_health + heal_amount)
+        print(f"Player heals for {heal_amount} health!")
 
-    def block(lowNum, highNum, APcost):
-        #TODO implement block function
-        pass
+        # Reduce action points after performing an action
+        self.protagonist.reduce_action_points()
 
+    def block(self, lowNum, highNum, APcost):
+        block_points = random.randint(5, 10)
+        self.protagonist.block_points += block_points
+        print(f"Player blocks, gaining {block_points} block points!")
+
+        # Reduce action points after performing an action
+        self.protagonist.reduce_action_points()
