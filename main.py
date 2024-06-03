@@ -5,7 +5,8 @@ from GameDisplay import GameDisplay
 from Protagonist import Protagonist
 from Enemy import Enemy
 from Card import Card
-from Deck import Deck
+from deck import Deck
+from CardDictionary import cards 
 
 class Main:
     def __init__(self):
@@ -14,8 +15,7 @@ class Main:
         self.display = GameDisplay(self.WIDTH, self.HEIGHT)
         self.protagonist = Protagonist(self.WIDTH, self.HEIGHT)
         self.enemy = Enemy(self.WIDTH, self.HEIGHT)
-        self.deck = Deck()
-        self.card = Card()
+        self.deck = Deck(cards)
         self.actions = ["attack", "heal", "block"]
 
     def end_turn(self):
@@ -100,14 +100,16 @@ class Main:
             self.protagonist.display_info(40, 450, 20, 520, 70, 515)  # Updated positions for protagonist's health bar, action points, and shield
             self.enemy.display_info(300, 10, 330, 80, 380, 18)  # Updated positions for enemy's health bar, enemy image, and shield
 
+            self.deck.draw_initial_hand()
             # Draw card areas
-            self.deck.draw_card_areas()
+            self.display.draw_card_areas(self.deck)
 
             # Draw buttons
             self.display.draw_button_areas()
 
             # Update display
             pygame.display.flip()
+
 
 
 if __name__ == "__main__":

@@ -3,13 +3,16 @@ import sys
 from Protagonist import Protagonist
 import random
 class Card:
-    def __init__(self):
+    def __init__(self, iName, iPicture, iText):
         super().__init__()
 
         #define card 
-        name = ""
-        picture = pygame.image.load("Images/Enemies/MilkJugSteve.png")
-        text = ""
+        self.name = iName
+        self.picture = pygame.image.load(iPicture)
+        self.text = iText
+        self.cardfront = pygame.image.load("Images\Display\CardFront.png")
+        self. cardfront = pygame.transform.scale(self.cardfront, (65, 85))
+        
         def run():
             pass
         
@@ -51,5 +54,5 @@ class Card:
         # Reduce action points after performing an action
         self.protagonist.reduce_action_points()
 
-    def display(x, y):
-        pass
+    def display(self, screen, x, y):
+        screen.blit(self.cardfront, (x, y, 100, 130))   

@@ -104,11 +104,11 @@ class GameDisplay:
     def get_height(self):
         return self.height
     
-    def draw_card_areas(self):
+    def draw_card_areas(self, deck):
         # Draw card holster background
         self.screen.blit(self.card_holster_image, (150, 480))  # Position the background
-        for area in self.card_areas.values():
-            pygame.draw.rect(self.screen, (0, 0, 0), area, 2)  # Draw card areas as rectangles
+        deck.draw_card_areas(self.screen)
+
 
     def draw_button_areas(self):
         for key in self.button_areas.keys():
