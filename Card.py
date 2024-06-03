@@ -17,7 +17,9 @@ class Card:
         self.deep_breath = pygame.transform.scale(self.deep_breath, (100, 150))
 
     def attack(self, lowNum, highNum, APcost):
-        damage = random.randint(5, 15)
+        lowNum = 5
+        highNum = 15
+        damage = random.randint(lowNum, highNum)
         self.enemy.current_health -= damage
         if self.enemy.current_health < 0:
             self.enemy.current_health = 0

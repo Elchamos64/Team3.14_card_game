@@ -1,0 +1,3 @@
+remove reduce_action_points from Protagonist.py and create an AP cost for each spell separatelly
+define cards: what action should it perform?
+What are lowNum, highNum?
