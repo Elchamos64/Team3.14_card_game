@@ -76,15 +76,16 @@ class GameDisplay:
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
                 # Handle card clicks
-                for card_name, area in self.card_areas.items():
+                for card_index, area in self.card_areas.items():
                     if area.collidepoint(mouse_pos):
-                        print(f"Card clicked: {card_name}")
-                        return card_name  # Return the card clicked
-                # Handle end turn button
+                        print(f"Card clicked: {card_index}")
+                        return card_index  # Return the card index clicked
+                # Handle end turn button clicks
                 for button, area in self.button_types.items():
                     if area.collidepoint(mouse_pos):
                         print(f"Button clicked: {button}")
                         return button  # Return the button clicked
+        return None  # Return None if no relevant event occurred
                     
     def update_display(self):
         pygame.display.flip()
@@ -118,21 +119,27 @@ class GameDisplay:
         self.screen.blit(block_points_text, text_rect)
 
     def draw_hand(self, hand):
-        card_width = 60
-        card_height = 100
-        x = 150
-        y = 460
-        gap = 20
-        
-        for card_name in hand:
+        card_width = 60  # Width of the card images
+        card_height = 100  # Height of the card images
+        x = 150  # Initial x-coordinate for drawing the cards
+        y = 460  # y-coordinate for drawing the cards
+        gap = 20  # Gap between cards
+
+        self.card_areas.clear()  # Clear the previous card areas
+
+        for i, card_name in enumerate(hand):
             if card_name is not None:
+                # Get the card image from the Card class
                 card_image = Card.cards.get(card_name, [None])[0]
                 if card_image is not None:
                     # Resize the card image to the desired size
                     card_image = pygame.transform.scale(card_image, (card_width, card_height))
                     
-                    # Adjust card position for each card in the hand
-                    self.screen.blit(card_image, (x, y))
+                    # Draw the card image on the screen at position (x, y)
+                    card_rect = self.screen.blit(card_image, (x, y))
+                    
+                    # Store the card area with its index
+                    self.card_areas[i] = card_rect
                     
                     # Increment x position for the next card
                     x += card_width + gap
