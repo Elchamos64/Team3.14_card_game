@@ -5,6 +5,7 @@ from GameDisplay import GameDisplay
 from Protagonist import Protagonist
 from Enemy import Enemy
 from Card import Card
+from Deck import Deck
 
 class Main:
     def __init__(self):
@@ -13,6 +14,7 @@ class Main:
         self.display = GameDisplay(self.WIDTH, self.HEIGHT)
         self.protagonist = Protagonist(self.WIDTH, self.HEIGHT)
         self.enemy = Enemy(self.WIDTH, self.HEIGHT)
+        self.deck = Deck()
         self.card = Card()
         self.actions = ["attack", "heal", "block"]
 
@@ -99,7 +101,7 @@ class Main:
             self.enemy.display_info(300, 10, 330, 80, 380, 18)  # Updated positions for enemy's health bar, enemy image, and shield
 
             # Draw card areas
-            self.display.draw_card_areas()
+            self.deck.draw_card_areas()
 
             # Draw buttons
             self.display.draw_button_areas()

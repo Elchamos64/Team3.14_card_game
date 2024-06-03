@@ -5,16 +5,23 @@ import random
 class Card:
     def __init__(self):
         super().__init__()
-        
-        #define cards and replace with images
-        self.kick = pygame.image.load()
-        self.hands_up = pygame.image.load()
-        self.deep_breath = pygame.image.load()
 
-        #scale images
-        self.kick = pygame.transform.scale(self.kick, (100, 150))
-        self.hands_up = pygame.transform.scale(self.hands_up, (100, 150))
-        self.deep_breath = pygame.transform.scale(self.deep_breath, (100, 150))
+        #define card 
+        name = ""
+        picture = pygame.image.load("Images/Enemies/MilkJugSteve.png")
+        text = ""
+        def run():
+            pass
+        
+        # #define cards and replace with images
+        # self.kick = pygame.image.load()
+        # self.hands_up = pygame.image.load()
+        # self.deep_breath = pygame.image.load()
+
+        # #scale images
+        # self.kick = pygame.transform.scale(self.kick, (100, 150))
+        # self.hands_up = pygame.transform.scale(self.hands_up, (100, 150))
+        # self.deep_breath = pygame.transform.scale(self.deep_breath, (100, 150))
 
     def attack(self, lowNum, highNum, APcost):
         lowNum = 5
@@ -43,3 +50,6 @@ class Card:
 
         # Reduce action points after performing an action
         self.protagonist.reduce_action_points()
+
+    def display(x, y):
+        pass
