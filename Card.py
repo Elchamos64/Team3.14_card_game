@@ -4,13 +4,14 @@ from Protagonist import Protagonist
 from Enemy import Enemy
 import random
 class Card:
-    def __init__(self, iName, iPicture, iText):
+    def __init__(self, iName, iPicture, iText, iRun):
         super().__init__()
         pygame.font.init()
         #define card 
         self.name = iName
         self.picture = pygame.image.load(iPicture)
         self.text = iText
+        self.run = iRun
         self.cardfront = pygame.image.load("Images\Display\CardFront.png")
         self.cardfront = pygame.transform.scale(self.cardfront, (65, 85))
         self.font = pygame.font.SysFont(None, 12)
@@ -39,21 +40,23 @@ class Card:
                 self.enemy.current_health = 0
             print(f"Player attacks for {damage} damage!")
             # Reduce action points after performing an action
-            self.protagonist.reduce_action_points()
+            self.protagonist.reduce_action_points(APcost)
 
     def heal(self,lowNum, highNum, APcost):
-        heal_amount = random.randint(10, 20)
-        self.protagonist.current_health = min(self.protagonist.max_health, self.protagonist.current_health + heal_amount)
-        print(f"Player heals for {heal_amount} health!")
-        # Reduce action points after performing an action
-        self.protagonist.reduce_action_points()
+        if self.protagonist.current_action_points > 0:
+            heal_amount = random.randint(lowNum, highNum)
+            self.protagonist.current_health = min(self.protagonist.max_health, self.protagonist.current_health + heal_amount)
+            print(f"Player heals for {heal_amount} health!")
+            # Reduce action points after performing an action
+            self.protagonist.reduce_action_points(APcost)
 
     def block(self, lowNum, highNum, APcost):
-        block_points = random.randint(5, 10)
-        self.protagonist.block_points += block_points
-        print(f"Player blocks, gaining {block_points} block points!")
-        # Reduce action points after performing an action
-        self.protagonist.reduce_action_points()
+        if self.protagonist.current_action_points > 0:
+            block_points = random.randint(lowNum, highNum)
+            self.protagonist.block_points += block_points
+            print(f"Player blocks, gaining {block_points} block points!")
+            # Reduce action points after performing an action
+            self.protagonist.reduce_action_points(APcost)
 
     def display(self, screen, x, y):
         screen.blit(self.cardfront, (x, y, 100, 130))   

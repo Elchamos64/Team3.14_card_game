@@ -37,14 +37,6 @@ class GameDisplay:
         self.card_holster_image = pygame.image.load("Images/Display/CardHolster.png")
         self.card_holster_image = pygame.transform.scale(self.card_holster_image, (420, 100))  # Adjust size as needed
 
-        # Define card areas
-        self.card_areas = {
-            "kick": pygame.Rect(50, 500, 100, 150),
-            "hands_up": pygame.Rect(200, 500, 100, 150),
-            "deep_breath": pygame.Rect(350, 500, 100, 150),
-        }
-
-
         # Define button areas
         self.button_areas = {
             self.end_turn_button: pygame.Rect(600, 500, 144, 45),
