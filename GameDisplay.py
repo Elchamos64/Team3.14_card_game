@@ -7,6 +7,7 @@ class GameDisplay:
         self.width = width
         self.height = height
         self.screen = pygame.display.set_mode((width, height))
+        self.card_areas = {}
         self.screen.fill((255, 255, 255))  # Set screen color to white
         pygame.display.set_caption("Card Game")
 
