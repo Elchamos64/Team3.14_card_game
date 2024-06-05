@@ -84,9 +84,10 @@ class GameDisplay:
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
                 # Handle card areas
-                for card, area in self.card_areas.items():
+                for card_index, area in self.card_areas.items():
                     if area.collidepoint(mouse_pos):
-                        return card  # Return the card clicked
+                        print(f"Card clicked: {card_index}")
+                        return card_index  # Return the card clicked
                 # Handle End turn
                 for button, area in self.button_types.items():
                     if area.collidepoint(mouse_pos):

@@ -1,6 +1,7 @@
 import pygame
 import sys
 from Protagonist import Protagonist
+from Enemy import Enemy
 import random
 class Card:
     def __init__(self, iName, iPicture, iText):
@@ -14,6 +15,8 @@ class Card:
         self.cardfront = pygame.transform.scale(self.cardfront, (65, 85))
         self.font = pygame.font.SysFont(None, 12)
         self.nameFont = pygame.font.SysFont(None, 20)
+        self.enemy = Enemy
+        self.protagonist = Protagonist
 
         def run():
             pass
@@ -29,22 +32,19 @@ class Card:
         # self.deep_breath = pygame.transform.scale(self.deep_breath, (100, 150))
 
     def attack(self, lowNum, highNum, APcost):
-        lowNum = 5
-        highNum = 15
-        damage = random.randint(lowNum, highNum)
-        self.enemy.current_health -= damage
-        if self.enemy.current_health < 0:
-            self.enemy.current_health = 0
-        print(f"Player attacks for {damage} damage!")
-        
-        # Reduce action points after performing an action
-        self.protagonist.reduce_action_points()
+        if self.protagonist.current_action_points > 0:
+            damage = random.randint(lowNum, highNum)
+            self.enemy.current_health -= damage
+            if self.enemy.current_health < 0:
+                self.enemy.current_health = 0
+            print(f"Player attacks for {damage} damage!")
+            # Reduce action points after performing an action
+            self.protagonist.reduce_action_points()
 
     def heal(self,lowNum, highNum, APcost):
         heal_amount = random.randint(10, 20)
         self.protagonist.current_health = min(self.protagonist.max_health, self.protagonist.current_health + heal_amount)
         print(f"Player heals for {heal_amount} health!")
-
         # Reduce action points after performing an action
         self.protagonist.reduce_action_points()
 
@@ -52,7 +52,6 @@ class Card:
         block_points = random.randint(5, 10)
         self.protagonist.block_points += block_points
         print(f"Player blocks, gaining {block_points} block points!")
-
         # Reduce action points after performing an action
         self.protagonist.reduce_action_points()
 
