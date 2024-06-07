@@ -64,3 +64,4 @@ class Card:
         screen.blit(box_points_text, (x, y+75))
         box_points_name = self.nameFont.render(str(self.name), True, (0, 0, 0))  # Black color
         screen.blit(box_points_name, (x, y+5))
+        
