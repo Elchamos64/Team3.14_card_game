@@ -10,6 +10,7 @@ class Card:
         #define card 
         self.name = iName
         self.picture = pygame.image.load(iPicture)
+        self.picture = pygame.transform.scale(self.picture, (50, 50))
         self.text = iText
         self.run = iRun
         self.cardfront = pygame.image.load("Images\Display\CardFront.png")
@@ -61,6 +62,7 @@ class Card:
     def display(self, screen, x, y):
         screen.blit(self.cardfront, (x, y, 100, 130))   
         box_points_text = self.font.render(str(self.text), True, (0, 0, 0))  # Black color
+        screen.blit(self.picture, (x+5, y+20, 50, 50))
         screen.blit(box_points_text, (x, y+75))
         box_points_name = self.nameFont.render(str(self.name), True, (0, 0, 0))  # Black color
         screen.blit(box_points_name, (x, y+5))

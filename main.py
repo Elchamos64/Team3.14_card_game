@@ -18,7 +18,6 @@ class Main:
         self.deck = Deck(cards)
         self.actions = ["attack", "heal", "block"]
         self.card = Card
-        self.card = Card()
 
     def end_turn(self):
         if self.protagonist.current_action_points < self.protagonist.max_action_points:
