@@ -5,7 +5,7 @@ from GameDisplay import GameDisplay
 from Protagonist import Protagonist
 from Enemy import Enemy
 from Card import Card
-from Deck import Deck
+from deck import Deck
 
 class Main:
     def __init__(self):
