@@ -47,8 +47,8 @@ class Protagonist(GameDisplay):
         # Blit action point text
         self.screen.blit(action_point_text, text_rect)
 
-    def reduce_action_points(self):
+    def reduce_action_points(self, APcost):
         if self.current_action_points > 0:
-            self.current_action_points -= 1
+            self.current_action_points -= APcost
     
     

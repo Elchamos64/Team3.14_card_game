@@ -6,6 +6,7 @@ from Protagonist import Protagonist
 from Enemy import Enemy
 from Card import Card
 from deck import Deck
+from CardDictionary import cards 
 
 class Main:
     def __init__(self):
@@ -14,9 +15,9 @@ class Main:
         self.display = GameDisplay(self.WIDTH, self.HEIGHT)
         self.protagonist = Protagonist(self.WIDTH, self.HEIGHT)
         self.enemy = Enemy(self.WIDTH, self.HEIGHT)
-        self.deck = Deck()
-        self.card = Card()
+        self.deck = Deck(cards)
         self.actions = ["attack", "heal", "block"]
+        self.card = Card
 
     def end_turn(self):
         if self.protagonist.current_action_points < self.protagonist.max_action_points:
@@ -24,33 +25,7 @@ class Main:
         self.enemy_action()
 
     def player_action(self, action):
-        #Old code for referencing
-        # if self.protagonist.current_action_points > 0:
-        #     if action == "attack":
-        #         damage = random.randint(5, 15)
-        #         self.enemy.current_health -= damage
-        #         if self.enemy.current_health < 0:
-        #             self.enemy.current_health = 0
-        #         print(f"Player attacks for {damage} damage!")
-        #     elif action == "heal":
-        #         heal_amount = random.randint(10, 20)
-        #         self.protagonist.current_health = min(self.protagonist.max_health, self.protagonist.current_health + heal_amount)
-        #         print(f"Player heals for {heal_amount} health!")
-        #     elif action == "block":
-        #         block_points = random.randint(5, 10)
-        #         self.protagonist.block_points += block_points
-        #         print(f"Player blocks, gaining {block_points} block points!")
-
-            # Reduce action points after performing an action
-            # self.protagonist.reduce_action_points()
         if self.protagonist.current_action_points > 0:
-            if action == "kick":
-                self.card.attack(1,3,2)
-            elif action == "deep_breath":
-                self.card.heal(3,6,3)
-            if action == "hands_up":
-                self.card.block(2,2,1)
-            
             # If action is end_turn, reset action points
             if action == "end_turn": 
                 self.end_turn()
@@ -100,14 +75,16 @@ class Main:
             self.protagonist.display_info(40, 450, 20, 520, 70, 515)  # Updated positions for protagonist's health bar, action points, and shield
             self.enemy.display_info(300, 10, 330, 80, 380, 18)  # Updated positions for enemy's health bar, enemy image, and shield
 
+            self.deck.draw_initial_hand()
             # Draw card areas
-            self.deck.draw_card_areas()
+            self.display.draw_card_areas(self.deck)
 
             # Draw buttons
             self.display.draw_button_areas()
 
             # Update display
             pygame.display.flip()
+
 
 
 if __name__ == "__main__":
