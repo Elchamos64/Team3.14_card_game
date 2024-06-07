@@ -7,6 +7,7 @@ class GameDisplay:
         self.width = width
         self.height = height
         self.screen = pygame.display.set_mode((width, height))
+        self.card_areas = {}
         self.screen.fill((255, 255, 255))  # Set screen color to white
         pygame.display.set_caption("Card Game")
 
@@ -36,14 +37,6 @@ class GameDisplay:
         # Load card holster background
         self.card_holster_image = pygame.image.load("Images/Display/CardHolster.png")
         self.card_holster_image = pygame.transform.scale(self.card_holster_image, (420, 100))  # Adjust size as needed
-
-        # Define card areas
-        self.card_areas = {
-            "kick": pygame.Rect(50, 500, 100, 150),
-            "hands_up": pygame.Rect(200, 500, 100, 150),
-            "deep_breath": pygame.Rect(350, 500, 100, 150),
-        }
-
 
         # Define button areas
         self.button_areas = {
@@ -84,9 +77,10 @@ class GameDisplay:
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
                 # Handle card areas
-                for card, area in self.card_areas.items():
+                for card_index, area in self.card_areas.items():
                     if area.collidepoint(mouse_pos):
-                        return card  # Return the card clicked
+                        print(f"Card clicked: {card_index}")
+                        return card_index  # Return the card clicked
                 # Handle End turn
                 for button, area in self.button_types.items():
                     if area.collidepoint(mouse_pos):
