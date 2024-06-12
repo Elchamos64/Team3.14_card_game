@@ -26,6 +26,8 @@ class Main:
 
     def player_action(self, action):
         if self.protagonist.current_action_points > 0:
+            if action < 5:
+                Deck.use_card(action)
             # If action is end_turn, reset action points
             if action == "end_turn": 
                 self.end_turn()

@@ -20,18 +20,16 @@ class Card:
         self.enemy = Enemy
         self.protagonist = Protagonist
 
-        def run():
-            pass
-        
-        # #define cards and replace with images
-        # self.kick = pygame.image.load()
-        # self.hands_up = pygame.image.load()
-        # self.deep_breath = pygame.image.load()
 
-        # #scale images
-        # self.kick = pygame.transform.scale(self.kick, (100, 150))
-        # self.hands_up = pygame.transform.scale(self.hands_up, (100, 150))
-        # self.deep_breath = pygame.transform.scale(self.deep_breath, (100, 150))
+
+            
+    def run(self):
+        if self.run[0] == 'attack':
+            self.attack(self.run[1], self.run[2], self.run[3])
+        if self.run[0] == 'heal':
+            self.heal(self.run[1], self.run[2], self.run[3])            
+        if self.run[0] == 'attack':
+            self.block(self.run[1], self.run[2], self.run[3])
 
     def attack(self, lowNum, highNum, APcost):
         if self.protagonist.current_action_points > 0:
