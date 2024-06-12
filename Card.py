@@ -28,7 +28,7 @@ class Card:
             self.attack(self.run[1], self.run[2], self.run[3])
         if self.run[0] == 'heal':
             self.heal(self.run[1], self.run[2], self.run[3])            
-        if self.run[0] == 'attack':
+        if self.run[0] == 'block':
             self.block(self.run[1], self.run[2], self.run[3])
 
     def attack(self, lowNum, highNum, APcost):
