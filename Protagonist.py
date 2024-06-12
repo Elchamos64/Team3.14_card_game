@@ -8,7 +8,7 @@ class Protagonist(GameDisplay):
         # Additional attributes for Protagonist
         self.max_health = 100
         self.current_health = 50
-        self.current_action_points = 10
+        self.current_action_points = 5
         self.max_action_points = 10
         self.block_points = 0  # Initialize block points for protagonist
 
