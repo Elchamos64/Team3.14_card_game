@@ -26,11 +26,12 @@ class Main:
 
     def player_action(self, action):
         if self.protagonist.current_action_points > 0:
-            if action < 5:
-                Deck.use_card(action)
+            match(action):
+                case "0" | "1" | "2" | "3" | "4":
+                    Deck.use_card(self.deck, int(action))
             # If action is end_turn, reset action points
-            if action == "end_turn": 
-                self.end_turn()
+                case "end_turn":
+                    self.end_turn()
 
     def enemy_action(self):
         #Move to another class, add multiple actions and bigger actions based on amount of turns
