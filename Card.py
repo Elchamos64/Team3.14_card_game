@@ -9,7 +9,10 @@ class Card:
         pygame.font.init()
         #define card 
         self.name = iName
-        self.picture = pygame.image.load(iPicture)
+        if isinstance(iPicture, str):
+            self.picture = pygame.image.load(iPicture)
+        else:
+            self.picture = iPicture
         self.picture = pygame.transform.scale(self.picture, (50, 50))
         self.text = iText
         self.run = iRun
@@ -17,45 +20,44 @@ class Card:
         self.cardfront = pygame.transform.scale(self.cardfront, (65, 85))
         self.font = pygame.font.SysFont(None, 12)
         self.nameFont = pygame.font.SysFont(None, 20)
-        self.enemy = Enemy
-        self.protagonist = Protagonist
+
 
 
 
             
-    def run(self):
+    def runCard(self, protagonist, enemy):
         if self.run[0] == 'attack':
-            self.attack(self.run[1], self.run[2], self.run[3])
+            self.attack(self.run[1], self.run[2], self.run[3], protagonist, enemy)
         if self.run[0] == 'heal':
-            self.heal(self.run[1], self.run[2], self.run[3])            
+            self.heal(self.run[1], self.run[2], self.run[3], protagonist)            
         if self.run[0] == 'block':
-            self.block(self.run[1], self.run[2], self.run[3])
+            self.block(self.run[1], self.run[2], self.run[3], protagonist)
 
-    def attack(self, lowNum, highNum, APcost):
-        if self.protagonist.current_action_points > 0:
+    def attack(self, lowNum, highNum, APcost, protagonist, enemy):
+        if protagonist.current_action_points > 0:
             damage = random.randint(lowNum, highNum)
-            self.enemy.current_health -= damage
-            if self.enemy.current_health < 0:
-                self.enemy.current_health = 0
+            enemy.current_health -= damage
+            if enemy.current_health < 0:
+                enemy.current_health = 0
             print(f"Player attacks for {damage} damage!")
             # Reduce action points after performing an action
-            self.protagonist.reduce_action_points(APcost)
+            protagonist.reduce_action_points(APcost)
 
-    def heal(self,lowNum, highNum, APcost):
-        if self.protagonist.current_action_points > 0:
+    def heal(self,lowNum, highNum, APcost, protagonist):
+        if protagonist.current_action_points > 0:
             heal_amount = random.randint(lowNum, highNum)
-            self.protagonist.current_health = min(self.protagonist.max_health, self.protagonist.current_health + heal_amount)
+            protagonist.current_health = min(protagonist.max_health, protagonist.current_health + heal_amount)
             print(f"Player heals for {heal_amount} health!")
             # Reduce action points after performing an action
-            self.protagonist.reduce_action_points(APcost)
+            protagonist.reduce_action_points(APcost)
 
-    def block(self, lowNum, highNum, APcost):
-        if self.protagonist.current_action_points > 0:
+    def block(self, lowNum, highNum, APcost, protagonist):
+        if protagonist.current_action_points > 0:
             block_points = random.randint(lowNum, highNum)
-            self.protagonist.block_points += block_points
+            protagonist.block_points += block_points
             print(f"Player blocks, gaining {block_points} block points!")
             # Reduce action points after performing an action
-            self.protagonist.reduce_action_points(APcost)
+            protagonist.reduce_action_points(APcost)
 
     def display(self, screen, x, y):
         screen.blit(self.cardfront, (x, y, 100, 130))   

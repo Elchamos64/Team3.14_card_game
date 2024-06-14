@@ -19,9 +19,10 @@ class Deck:
             if self.deck:
                 self.hand.append(self.deck.pop())
 
-    def use_card(self, card_index):
+    def use_card(self, card_index, protagonist, enemy):
         if 0 <= card_index < len(self.hand):
             used_card = self.hand.pop(card_index)
+            used_card.runCard(protagonist, enemy)
             self.discard.append(used_card)
             return used_card
         return None
