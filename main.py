@@ -25,27 +25,17 @@ class Main:
         self.deck.discard.clear()
         self.deck.draw_initial_hand()
 
-    def player_action(self, card_index):
-        if card_index is not None:
-            card_name = self.deck.hand[card_index]  # Get the card name using the index
-            card_values = Card.get_values(card_name)  # Get the card values from the Card class
-            if card_values:
-                attack_damage, heal_amount, block_points, ap_cost = card_values
-                # Check if the protagonist has enough action points
-                if self.protagonist.current_action_points >= ap_cost:
-                    self.protagonist.current_action_points -= ap_cost  # Deduct the action points
-                    used_card = self.deck.use_card(card_index)  # Use the card from the deck
+    class Main:
+        def player_action(self, card_index):
+            if card_index is not None:
+                card_name = self.deck.hand[card_index]
+                card_data = Card.cards.get(card_name)
+                if card_data:
+                    card_function = card_data[3]
+                    used_card = self.deck.use_card(card_index)
                     if used_card:
                         print(f"Used card: {used_card}")
-                        # Apply card effects based on its values
-                        if attack_damage > 0:
-                            self.enemy.current_health -= attack_damage
-                            if self.enemy.current_health < 0:
-                                self.enemy.current_health = 0
-                        if heal_amount > 0:
-                            self.protagonist.current_health = min(self.protagonist.max_health, self.protagonist.current_health + heal_amount)
-                        if block_points > 0:
-                            self.protagonist.block_points += block_points
+                        card_function(self, self)  # Apply the card's function
 
     def enemy_action(self):
         action = random.choice(self.actions)
@@ -94,5 +84,6 @@ class Main:
             pygame.display.flip()  # Update the full display surface to the screen
 
 if __name__ == "__main__":
+    Card.load_images()
     game = Main()
     game.run()
