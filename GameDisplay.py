@@ -7,7 +7,8 @@ class GameDisplay:
         self.width = width
         self.height = height
         self.screen = pygame.display.set_mode((width, height))
-        self.card_areas = {}
+        self.card_areas = {
+        }
         self.screen.fill((255, 255, 255))  # Set screen color to white
         pygame.display.set_caption("Card Game")
 
@@ -44,6 +45,13 @@ class GameDisplay:
         }
         self.button_types = {
             "end_turn": pygame.Rect(600, 500, 144, 45),
+        }
+        self.card_areas = {
+            "0": pygame.Rect(150, 480, 65, 85),
+            "1": pygame.Rect(220, 480, 65, 85),
+            "2": pygame.Rect(290, 480, 65, 85),
+            "3": pygame.Rect(360, 480, 65, 85),
+            "4": pygame.Rect(430, 480, 65, 85),
         }
 
     def clear_screen(self):
