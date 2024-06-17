@@ -39,9 +39,12 @@ class Main:
         action = random.choice(self.actions)
         if action == "attack":
             damage = random.randint(5, 15)
-            self.protagonist.current_health -= damage
-            if self.protagonist.current_health < 0:
-                self.protagonist.current_health = 0
+            self.protagonist.block_points -= damage
+            if self.protagonist.block_points < 0:
+                self.protagonist.current_health += self.protagonist.block_points
+                self.protagonist.block_points = 0
+                if self.protagonist.current_health < 0:
+                    self.protagonist.current_health = 0
             print(f"Enemy attacks for {damage} damage!")
         elif action == "heal":
             heal_amount = random.randint(5, 10)
