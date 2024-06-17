@@ -23,16 +23,17 @@ class Main:
         if self.protagonist.current_action_points < self.protagonist.max_action_points:
             self.protagonist.current_action_points = self.protagonist.max_action_points
         self.enemy_action()
+        self.deck.reshuffle_discard_into_deck()
+        self.deck.draw_cards(3)
 
     def player_action(self, action):
         if self.protagonist.current_action_points > 0:
-            match(action):
-                case "0" | "1" | "2" | "3" | "4":
-                    Deck
-                    Deck.use_card(self.deck, int(action), self.protagonist, self.enemy)
-            # If action is end_turn, reset action points
-                case "end_turn":
-                    self.end_turn()
+            if action.isdigit() and 0 <= int(action) < len(self.deck.hand):
+                used_card = self.deck.use_card(int(action), self.protagonist, self.enemy)
+                if used_card:
+                    self.display.update_display()  # Update display after card use
+            elif action == "end_turn":
+                self.end_turn()
 
     def enemy_action(self):
         #Move to another class, add multiple actions and bigger actions based on amount of turns
@@ -66,6 +67,7 @@ class Main:
 
     def run(self):
         running = True
+        self.deck.draw_initial_hand()
         while running:
             self.display.clear_screen()
 
@@ -82,7 +84,7 @@ class Main:
             self.protagonist.display_info(40, 450, 20, 520, 70, 515)  # Updated positions for protagonist's health bar, action points, and shield
             self.enemy.display_info(300, 10, 330, 80, 380, 18)  # Updated positions for enemy's health bar, enemy image, and shield
 
-            self.deck.draw_initial_hand()
+            
             # Draw card areas
             self.display.draw_card_areas(self.deck)
 

@@ -34,7 +34,7 @@ class Card:
             self.block(self.run[1], self.run[2], self.run[3], protagonist)
 
     def attack(self, lowNum, highNum, APcost, protagonist, enemy):
-        if protagonist.current_action_points > APcost:
+        if protagonist.current_action_points >= APcost:
             damage = random.randint(lowNum, highNum)
             enemy.block_points -= damage
             if enemy.block_points < 0:
@@ -47,7 +47,7 @@ class Card:
             protagonist.reduce_action_points(APcost)
 
     def heal(self,lowNum, highNum, APcost, protagonist):
-        if protagonist.current_action_points > APcost:
+        if protagonist.current_action_points >= APcost:
             heal_amount = random.randint(lowNum, highNum)
             protagonist.current_health = min(protagonist.max_health, protagonist.current_health + heal_amount)
             print(f"Player heals for {heal_amount} health!")
@@ -55,7 +55,7 @@ class Card:
             protagonist.reduce_action_points(APcost)
 
     def block(self, lowNum, highNum, APcost, protagonist):
-        if protagonist.current_action_points > APcost:
+        if protagonist.current_action_points >= APcost:
             block_points = random.randint(lowNum, highNum)
             protagonist.block_points += block_points
             print(f"Player blocks, gaining {block_points} block points!")

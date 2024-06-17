@@ -88,12 +88,12 @@ class GameDisplay:
                 for card_index, area in self.card_areas.items():
                     if area.collidepoint(mouse_pos):
                         print(f"Card clicked: {card_index}")
-                        return card_index  # Return the card clicked
-                # Handle End turn
-                for button, area in self.button_types.items():
+                        return card_index  # Return the card clicked as string
+                # Handle End turn button
+                for button, area in self.button_areas.items():
                     if area.collidepoint(mouse_pos):
-                        return button # Return the button clicked
-
+                        return "end_turn"  # Return "end_turn" if end turn button is clicked
+        return None
     def update_display(self):
         pygame.display.flip()
 
