@@ -5,7 +5,7 @@ class Deck:
     def __init__(self, cards):
         self.all_cards = [
             cards["Hide"],
-            cards["Healing Potion"], 
+            cards["Heal Potion"], 
             cards["Kick"],
             cards["Kick"],
             cards["Sword Slash"],
