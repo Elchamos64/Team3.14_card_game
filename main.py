@@ -1,6 +1,6 @@
 import pygame
 import sys
-import random
+
 from GameDisplay import GameDisplay
 from Protagonist import Protagonist
 from Enemy import Enemy
@@ -22,7 +22,9 @@ class Main:
     def end_turn(self):
         if self.protagonist.current_action_points < self.protagonist.max_action_points:
             self.protagonist.current_action_points = self.protagonist.max_action_points
-        self.enemy_action()
+        Enemy.enemy_action(self)
+        self.deck.reshuffle_discard_into_deck()
+        self.deck.draw_cards(3)
         self.deck.draw_cards(3)
 
     def player_action(self, action):
@@ -64,6 +66,7 @@ class Main:
     def run(self):
         running = True
         self.deck.draw_initial_hand()
+        self.deck.draw_initial_hand()
         while running:
             self.display.clear_screen()
 
@@ -80,6 +83,7 @@ class Main:
             self.protagonist.display_info(40, 450, 20, 520, 70, 515)  # Updated positions for protagonist's health bar, action points, and shield
             self.enemy.display_info(300, 10, 330, 80, 380, 18)  # Updated positions for enemy's health bar, enemy image, and shield
 
+            
             # Draw card areas
             self.display.draw_card_areas(self.deck)
 

@@ -45,12 +45,6 @@ class Deck:
             self.discard.clear()
             random.shuffle(self.deck)
 
-    #Starts process for hand array to gain three cards from the deck array.
-    def end_turn(self):
-        self.discard.extend(self.hand)
-        self.hand.clear()
-        self.draw_cards(3)
-    
     #Give the size of the cards for display and integration.
     def draw_card_areas(self, screen):
         x = 150

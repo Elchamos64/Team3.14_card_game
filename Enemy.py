@@ -7,7 +7,7 @@ class Enemy(GameDisplay):
         super().__init__(width, height)
         # Additional attributes for Enemy
         self.max_health = 50
-        self.current_health = 20
+        self.current_health = 50
         self.block_points = 25  # Example block points
 
         # Load enemy image and scale it
