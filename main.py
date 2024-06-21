@@ -23,8 +23,6 @@ class Main:
         if self.protagonist.current_action_points < self.protagonist.max_action_points:
             self.protagonist.current_action_points = self.protagonist.max_action_points
         Enemy.enemy_action(self)
-        self.deck.reshuffle_discard_into_deck()
-        self.deck.draw_cards(3)
         self.deck.draw_cards(3)
 
     def player_action(self, action):
