@@ -1,6 +1,6 @@
 import pygame
 import sys
-import random
+
 from GameDisplay import GameDisplay
 from Protagonist import Protagonist
 from Enemy import Enemy
@@ -22,7 +22,7 @@ class Main:
     def end_turn(self):
         if self.protagonist.current_action_points < self.protagonist.max_action_points:
             self.protagonist.current_action_points = self.protagonist.max_action_points
-        self.enemy_action()
+        Enemy.enemy_action(self)
         self.deck.reshuffle_discard_into_deck()
         self.deck.draw_cards(3)
 
@@ -35,26 +35,7 @@ class Main:
             elif action == "end_turn":
                 self.end_turn()
 
-    def enemy_action(self):
-        #Move to another class, add multiple actions and bigger actions based on amount of turns
-        action = random.choice(self.actions)
-        if action == "attack":
-            damage = random.randint(5, 15)
-            self.protagonist.block_points -= damage
-            if self.protagonist.block_points < 0:
-                self.protagonist.current_health += self.protagonist.block_points
-                self.protagonist.block_points = 0
-                if self.protagonist.current_health < 0:
-                    self.protagonist.current_health = 0
-            print(f"Enemy attacks for {damage} damage!")
-        elif action == "heal":
-            heal_amount = random.randint(5, 10)
-            self.enemy.current_health = min(self.enemy.max_health, self.enemy.current_health + heal_amount)
-            print(f"Enemy heals for {heal_amount} health!")
-        elif action == "block":
-            block_points = random.randint(5, 10)
-            self.enemy.block_points += block_points
-            print(f"Enemy blocks, gaining {block_points} block points!")
+
 
     def check_game_over(self):
         if self.protagonist.current_health <= 0:

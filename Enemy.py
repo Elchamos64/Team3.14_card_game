@@ -1,6 +1,8 @@
 import pygame
 import sys
 from GameDisplay import GameDisplay
+import random
+from Protagonist import Protagonist
 
 class Enemy(GameDisplay):
     def __init__(self, width, height):
@@ -33,3 +35,24 @@ class Enemy(GameDisplay):
 
         # Draw the shield and block points
         self.draw_shield_and_block_points(shield_x, shield_y, self.block_points)
+    
+    def enemy_action(self):
+        #Move to another class, add multiple actions and bigger actions based on amount of turns
+        action = random.choice(self.actions)
+        if action == "attack":
+            damage = random.randint(5, 15)
+            self.protagonist.block_points -= damage
+            if self.protagonist.block_points < 0:
+                self.protagonist.current_health += self.protagonist.block_points
+                self.protagonist.block_points = 0
+                if self.protagonist.current_health < 0:
+                    self.protagonist.current_health = 0
+            print(f"Enemy attacks for {damage} damage!")
+        elif action == "heal":
+            heal_amount = random.randint(5, 10)
+            self.enemy.current_health = min(self.enemy.max_health, self.enemy.current_health + heal_amount)
+            print(f"Enemy heals for {heal_amount} health!")
+        elif action == "block":
+            block_points = random.randint(5, 10)
+            self.enemy.block_points += block_points
+            print(f"Enemy blocks, gaining {block_points} block points!")
