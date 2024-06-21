@@ -9,7 +9,7 @@ class Protagonist(GameDisplay):
         self.max_health = 100
         self.current_health = 100
         self.current_action_points = 5
-        self.max_action_points = 10
+        self.max_action_points = 5
         self.block_points = 0  # Initialize block points for protagonist
 
         # Load action point image and scale it
