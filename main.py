@@ -34,23 +34,6 @@ class Main:
                 case "end_turn":
                     self.end_turn()
 
-    def enemy_action(self):
-        #Move to another class, add multiple actions and bigger actions based on amount of turns
-        action = random.choice(self.actions)
-        if action == "attack":
-            damage = random.randint(5, 15)
-            self.protagonist.current_health -= damage
-            if self.protagonist.current_health < 0:
-                self.protagonist.current_health = 0
-            print(f"Enemy attacks for {damage} damage!")
-        elif action == "heal":
-            heal_amount = random.randint(5, 10)
-            self.enemy.current_health = min(self.enemy.max_health, self.enemy.current_health + heal_amount)
-            print(f"Enemy heals for {heal_amount} health!")
-        elif action == "block":
-            block_points = random.randint(5, 10)
-            self.enemy.block_points += block_points
-            print(f"Enemy blocks, gaining {block_points} block points!")
 
     def check_game_over(self):
         if self.protagonist.current_health <= 0:
