@@ -19,7 +19,9 @@ class Card:
         self.cardfront = pygame.image.load("Images\Display\CardFront.png")
         self.cardfront = pygame.transform.scale(self.cardfront, (65, 85))
         self.font = pygame.font.SysFont(None, 12)
-        self.nameFont = pygame.font.SysFont(None, 20)
+        self.nameFont = pygame.font.SysFont(None, 15)
+        self.action_point_image = pygame.image.load("Images/Display/ActionPoints.png")
+        self.action_point_image =pygame.transform.scale(self.action_point_image, (15, 15))
 
 
 
@@ -66,4 +68,6 @@ class Card:
         screen.blit(box_points_text, (x, y+75))
         box_points_name = self.nameFont.render(str(self.name), True, (0, 0, 0))  # Black color
         screen.blit(box_points_name, (x, y+5))
-        
+        screen.blit(self.action_point_image, (x+3, y+15, 15, 15))
+        action_points_text = self.font.render(str(self.run[3]), True, (0, 0, 0)) 
+        screen.blit(action_points_text, (x+9, y+20))

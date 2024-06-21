@@ -3,7 +3,16 @@ from Card import Card
 
 class Deck:
     def __init__(self, cards):
-        self.all_cards = list(cards.values())
+        self.all_cards = [
+            cards["Hide"],
+            cards["Heal Potion"], 
+            cards["Kick"],
+            cards["Kick"],
+            cards["Sword Slash"],
+            cards["Sword Slash"],
+            cards["Shield Block"],
+            cards["Shield Block"],
+        ]
         self.deck = self.all_cards.copy()
         random.shuffle(self.deck)
         self.hand = []
@@ -17,7 +26,7 @@ class Deck:
         for _ in range(num_cards):
             if not self.deck:
                 self.reshuffle_discard_into_deck()
-            if self.deck:
+            if (self.deck) and (len(self.hand) < 5):
                 self.hand.append(self.deck.pop())
 
     #Brings cards from the hand array to the discard array
