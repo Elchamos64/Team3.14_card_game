@@ -1,0 +1,3 @@
+*.cpyt
+.pyc
+.\__pycache__
