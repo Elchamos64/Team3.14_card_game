@@ -27,13 +27,15 @@ class Card:
 
 
             
-    def runCard(self, protagonist, enemy):
+    def runCard(self, protagonist, enemy, deck):
         if self.run[0] == 'attack':
             self.attack(self.run[1], self.run[2], self.run[3], protagonist, enemy)
         if self.run[0] == 'heal':
             self.heal(self.run[1], self.run[2], self.run[3], protagonist)            
         if self.run[0] == 'block':
             self.block(self.run[1], self.run[2], self.run[3], protagonist)
+        if self.run[0] == 'draw':
+            self.draw(self.run[1], self.run[2], self.run[3], protagonist, deck)
 
     def attack(self, lowNum, highNum, APcost, protagonist, enemy):
         if protagonist.current_action_points >= APcost:
@@ -61,6 +63,14 @@ class Card:
             block_points = random.randint(lowNum, highNum)
             protagonist.block_points += block_points
             print(f"Player blocks, gaining {block_points} block points!")
+            # Reduce action points after performing an action
+            protagonist.reduce_action_points(APcost)
+
+    def draw(self, lowNum, highNum, APcost, protagonist, deck):
+        if protagonist.current_action_points >= APcost:
+            draw_number= random.randint(lowNum, highNum)
+            deck.draw_cards(draw_number)
+            print(f"Player draws {draw_number} cards!")
             # Reduce action points after performing an action
             protagonist.reduce_action_points(APcost)
 

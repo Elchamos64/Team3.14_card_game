@@ -11,7 +11,7 @@ class Deck:
             cards["Sword Slash"],
             cards["Sword Slash"],
             cards["Shield Block"],
-            cards["Shield Block"],
+            cards["Investigate"],
         ]
         self.deck = self.all_cards.copy()
         random.shuffle(self.deck)
@@ -33,7 +33,7 @@ class Deck:
     def use_card(self, card_index, protagonist, enemy):
         if 0 <= card_index < len(self.hand):
             used_card = self.hand.pop(card_index)
-            used_card.runCard(protagonist, enemy)
+            used_card.runCard(protagonist, enemy, self)
             self.discard.append(used_card)
             return used_card
         return None
