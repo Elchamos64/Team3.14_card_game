@@ -18,11 +18,12 @@ class Main:
         self.deck = Deck(cards)
         self.actions = ["attack", "heal", "block"]
         self.card = Card
+        self.clock = pygame.time
 
     def end_turn(self):
         if self.protagonist.current_action_points < self.protagonist.max_action_points:
             self.protagonist.current_action_points = self.protagonist.max_action_points
-        Enemy.enemy_action(self)
+        self.enemy.enemy_action(self.clock, self.protagonist)
         self.deck.draw_cards(3)
 
     def player_action(self, action):
