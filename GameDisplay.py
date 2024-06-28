@@ -7,8 +7,7 @@ class GameDisplay:
         self.width = width
         self.height = height
         self.screen = pygame.display.set_mode((width, height))
-        self.card_areas = {
-        }
+        self.card_areas = {}
         self.screen.fill((255, 255, 255))  # Set screen color to white
         pygame.display.set_caption("Card Game")
 
@@ -24,8 +23,6 @@ class GameDisplay:
         self.red_heart_image = pygame.image.load("Images/Display/Heart.png")
         self.grey_heart_image = pygame.transform.scale(self.grey_heart_image, (self.grey_heart_image.get_width() * 4.5, self.grey_heart_image.get_height() * 4.5))
         self.red_heart_image = pygame.transform.scale(self.red_heart_image, (self.red_heart_image.get_width() * 4.5, self.red_heart_image.get_height() * 4.5))
-
-
 
         # Load buttons
         self.end_turn_button = pygame.image.load("Images/Display/EndTurn.png")
@@ -94,6 +91,7 @@ class GameDisplay:
                     if area.collidepoint(mouse_pos):
                         return "end_turn"  # Return "end_turn" if end turn button is clicked
         return None
+
     def update_display(self):
         pygame.display.flip()
 
@@ -111,7 +109,6 @@ class GameDisplay:
         self.screen.blit(self.card_holster_image, (150, 480))  # Position the background
         deck.draw_card_areas(self.screen)
 
-
     def draw_button_areas(self):
         for key in self.button_areas.keys():
             self.screen.blit(key, (self.button_areas.get(key).left, self.button_areas.get(key).top))
@@ -126,3 +123,59 @@ class GameDisplay:
 
         # Blit block points text
         self.screen.blit(block_points_text, text_rect)
+
+    def main_menu(self):
+        self.screen.fill((255, 255, 255))  # Clear screen to white
+        pygame.display.set_caption("Main Menu")
+
+        # Render main menu text
+        title_text = self.font.render("Main Menu", True, (0, 0, 0))  # Black color
+        play_button_text = self.font.render("Play", True, (0, 0, 0))  # Black color
+        quit_button_text = self.font.render("Quit", True, (0, 0, 0))  # Black color
+
+        title_rect = title_text.get_rect(center=(self.width // 2, self.height // 4))
+        play_button_rect = play_button_text.get_rect(center=(self.width // 2, self.height // 2))
+        quit_button_rect = quit_button_text.get_rect(center=(self.width // 2, self.height // 2 + 50))
+
+        self.screen.blit(title_text, title_rect)
+        self.screen.blit(play_button_text, play_button_rect)
+        self.screen.blit(quit_button_text, quit_button_rect)
+
+        pygame.display.flip()
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_pos = pygame.mouse.get_pos()
+                    if play_button_rect.collidepoint(mouse_pos):
+                        return "play"
+                    elif quit_button_rect.collidepoint(mouse_pos):
+                        pygame.quit()
+                        sys.exit()
+
+def main():
+    width, height = 800, 600
+    game_display = GameDisplay(width, height)
+
+    while True:
+        result = game_display.main_menu()
+        if result == "play":
+            # Start the game loop
+            while True:
+                game_display.clear_screen()
+                game_display.draw_button_areas()
+                game_display.update_display()
+
+                action = game_display.handle_events()
+                if action == "end_turn":
+                    print("End turn button clicked")
+                elif action is not None:
+                    print(f"Card clicked: {action}")
+        else:
+            break
+
+if __name__ == "__main__":
+    main()
