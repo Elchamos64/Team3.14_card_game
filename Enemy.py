@@ -52,7 +52,7 @@ class Enemy(GameDisplay):
         if action == "attack":
             self.sound_manager.play_sound('enemy_attack')
             self.attack = True
-            damage = random.randint(5, 15)
+            damage = random.randint(10, 20)
             protag.block_points -= damage
             if protag.block_points < 0:
                 protag.current_health += protag.block_points
@@ -62,11 +62,11 @@ class Enemy(GameDisplay):
                 print(f"Enemy attacks for {damage} damage!")
         elif action == "heal":
             self.attack = False
-            heal_amount = random.randint(5, 10)
+            heal_amount = random.randint(10, 15)
             self.current_health = min(self.max_health, self.current_health + heal_amount)
             print(f"Enemy heals for {heal_amount} health!")
         elif action == "block":
             self.attack = False
-            block_points = random.randint(5, 10)
+            block_points = random.randint(5, 15)
             self.block_points += block_points
             print(f"Enemy blocks, gaining {block_points} block points!")
