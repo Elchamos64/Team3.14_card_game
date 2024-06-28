@@ -157,10 +157,12 @@ class GameDisplay:
                         sys.exit()
 
 def main():
+    # Set up the game display
+    run = True
     width, height = 800, 600
     game_display = GameDisplay(width, height)
 
-    while True:
+    while run:
         result = game_display.main_menu()
         if result == "play":
             # Start the game loop
@@ -175,7 +177,7 @@ def main():
                 elif action is not None:
                     print(f"Card clicked: {action}")
         else:
-            break
+            run = False
 
 if __name__ == "__main__":
     main()
