@@ -48,8 +48,8 @@ class Main:
         return False
 
     def main_menu(self):
-        self.display.screen.fill((255, 255, 255))  # Clear screen to white
-        pygame.display.set_caption("Main Menu")
+        self.display.set_background('menu')  # Set the menu background
+        self.display.clear_screen()
 
         # Render main menu text
         font = pygame.font.SysFont(None, 50)
@@ -84,6 +84,7 @@ class Main:
         result = self.main_menu()
         if result == "play":
             self.sound_manager.play_music('Easy')
+            self.display.set_background('easy')
             running = True
             self.deck.draw_initial_hand()
             while running:

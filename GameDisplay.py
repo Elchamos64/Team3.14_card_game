@@ -10,11 +10,11 @@ class GameDisplay:
         self.screen = pygame.display.set_mode((width, height))
         self.card_areas = {}
         self.screen.fill((255, 255, 255))  # Set screen color to white
-        pygame.display.set_caption("Card Game")
+        pygame.display.set_caption("Deck Dungeon")
         self.sound_manager = Sound()
 
         # Set icon
-        icon = pygame.image.load("Images/Display/Heart.png")
+        icon = pygame.image.load("Images/Display/CardBack.png")
         pygame.display.set_icon(icon)
 
         # Font for displaying text
@@ -55,13 +55,17 @@ class GameDisplay:
 
     # Background management
         self.backgrounds = {
-            'menu': pygame.image.load('Images/Display/Menu.png'),
-            'easy': pygame.image.load('Images/Display/Easy.png'),
-            'medium': pygame.image.load('Images/Display/Medium.png'),
-            'hard' : pygame.image.load('Images/Display/Hard.png')
+            'menu': self.load_and_scale_image('Images/Display/Menu.png'),
+            'easy': self.load_and_scale_image('Images/Display/Easy.png'),
+            'medium': self.load_and_scale_image('Images/Display/Medium.png'),
+            'hard' : self.load_and_scale_image('Images/Display/Hard.png')
         }
         self.current_background = self.backgrounds['menu']  # Default background
 
+    def load_and_scale_image(self, image_path):
+        image = pygame.image.load(image_path)
+        return pygame.transform.scale(image, (self.width, self.height))
+    
     def set_background(self, level):
         if level in self.backgrounds:
             self.current_background = self.backgrounds[level]
