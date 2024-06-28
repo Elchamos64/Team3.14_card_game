@@ -20,8 +20,9 @@ class Main:
         self.actions = ["attack", "heal", "block"]
         self.card = Card
         self.clock = pygame.time
-        sound_manager = Sound()
-        sound_manager.play_music('Start')
+        self.sound_manager = Sound()
+        self.sound_manager.play_music('Start')
+        
     
     def end_turn(self):
         if self.protagonist.current_action_points < self.protagonist.max_action_points:
@@ -82,8 +83,8 @@ class Main:
     def run(self):
         result = self.main_menu()
         if result == "play":
+            self.sound_manager.play_music('Easy')
             running = True
-            self.deck.draw_initial_hand()
             self.deck.draw_initial_hand()
             while running:
                 self.display.clear_screen()

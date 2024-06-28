@@ -1,5 +1,6 @@
 import pygame
 import sys
+from Sound import Sound
 
 class GameDisplay:
     def __init__(self, width, height):
@@ -10,6 +11,7 @@ class GameDisplay:
         self.card_areas = {}
         self.screen.fill((255, 255, 255))  # Set screen color to white
         pygame.display.set_caption("Card Game")
+        self.sound_manager = Sound()
 
         # Set icon
         icon = pygame.image.load("Images/Display/Heart.png")
