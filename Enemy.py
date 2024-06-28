@@ -3,6 +3,7 @@ import sys
 from GameDisplay import GameDisplay
 import random
 from Protagonist import Protagonist
+from Sound import Sound
 
 class Enemy(GameDisplay):
     def __init__(self, width, height):
@@ -13,6 +14,7 @@ class Enemy(GameDisplay):
         self.block_points = 25 # Example block points
         self.attack = False
         self.actions = ["attack", "heal", "block"]
+        self.sound_manager = Sound()
 
 
         # Load enemy image and scale it
@@ -48,6 +50,7 @@ class Enemy(GameDisplay):
         #Move to another class, add multiple actions and bigger actions based on amount of turns
         action = random.choice(self.actions)
         if action == "attack":
+            self.sound_manager.play_sound('enemy_attack')
             self.attack = True
             damage = random.randint(5, 15)
             protag.block_points -= damage
