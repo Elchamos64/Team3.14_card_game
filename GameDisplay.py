@@ -53,8 +53,23 @@ class GameDisplay:
             "4": pygame.Rect(430, 480, 65, 85),
         }
 
+    # Background management
+        self.backgrounds = {
+            'menu': pygame.image.load('Images/Display/Menu.png'),
+            'easy': pygame.image.load('Images/Display/Easy.png'),
+            'medium': pygame.image.load('Images/Display/Medium.png'),
+            'hard' : pygame.image.load('Images/Display/Hard.png')
+        }
+        self.current_background = self.backgrounds['menu']  # Default background
+
+    def set_background(self, level):
+        if level in self.backgrounds:
+            self.current_background = self.backgrounds[level]
+        else:
+            raise ValueError(f"No background found for level: {level}")
+
     def clear_screen(self):
-        self.screen.fill((255, 255, 255))  # Clear screen to white
+        self.screen.blit(self.current_background, (0, 0))  # Draw the background image
 
     def draw_health_bar(self, current_health, max_health, x, y, width, height):
         # Draw grey heart (background)
@@ -129,7 +144,6 @@ class GameDisplay:
     def main_menu(self):
         self.screen.fill((255, 255, 255))  # Clear screen to white
         pygame.display.set_caption("Main Menu")
-
         # Render main menu text
         title_text = self.font.render("Main Menu", True, (0, 0, 0))  # Black color
         play_button_text = self.font.render("Play", True, (0, 0, 0))  # Black color

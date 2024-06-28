@@ -88,7 +88,6 @@ class Main:
             self.deck.draw_initial_hand()
             while running:
                 self.display.clear_screen()
-
                 # Handle events
                 action = self.display.handle_events()
                 if action:  # If an action was returned
