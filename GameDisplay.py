@@ -149,9 +149,9 @@ class GameDisplay:
         self.screen.fill((255, 255, 255))  # Clear screen to white
         pygame.display.set_caption("Main Menu")
         # Render main menu text
-        title_text = self.font.render("Main Menu", True, (0, 0, 0))  # Black color
-        play_button_text = self.font.render("Play", True, (0, 0, 0))  # Black color
-        quit_button_text = self.font.render("Quit", True, (0, 0, 0))  # Black color
+        title_text = self.font.render("Main Menu", True, (255, 255, 255))  # Black color
+        play_button_text = self.font.render("Play", True, (255, 255, 255))  # Black color
+        quit_button_text = self.font.render("Quit", True, (255, 255, 255))  # Black color
 
         title_rect = title_text.get_rect(center=(self.width // 2, self.height // 4))
         play_button_rect = play_button_text.get_rect(center=(self.width // 2, self.height // 2))

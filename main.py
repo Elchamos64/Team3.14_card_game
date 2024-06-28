@@ -53,9 +53,9 @@ class Main:
 
         # Render main menu text
         font = pygame.font.SysFont(None, 50)
-        title_text = font.render("Main Menu", True, (0, 0, 0))  # Black color
-        play_button_text = font.render("Play", True, (0, 0, 0))  # Black color
-        quit_button_text = font.render("Quit", True, (0, 0, 0))  # Black color
+        title_text = font.render("Main Menu", True, (255, 255, 255))  # Black color
+        play_button_text = font.render("Play", True, (255, 255, 255))  # Black color
+        quit_button_text = font.render("Quit", True, (255, 255, 255))  # Black color
 
         title_rect = title_text.get_rect(center=(self.WIDTH // 2, self.HEIGHT // 4))
         play_button_rect = play_button_text.get_rect(center=(self.WIDTH // 2, self.HEIGHT // 2))
