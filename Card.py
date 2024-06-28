@@ -3,10 +3,13 @@ import sys
 from Protagonist import Protagonist
 from Enemy import Enemy
 import random
+from Sound import Sound
+
 class Card:
     def __init__(self, iName, iPicture, iText, iRun):
         super().__init__()
         pygame.font.init()
+        self.sound_manager = Sound()
         #define card 
         self.name = iName
         if isinstance(iPicture, str):
@@ -39,6 +42,7 @@ class Card:
 
     def attack(self, lowNum, highNum, APcost, protagonist, enemy):
         if protagonist.current_action_points >= APcost:
+            self.sound_manager.play_sound('attack')
             damage = random.randint(lowNum, highNum)
             enemy.block_points -= damage
             if enemy.block_points < 0:
@@ -52,6 +56,7 @@ class Card:
 
     def heal(self,lowNum, highNum, APcost, protagonist):
         if protagonist.current_action_points >= APcost:
+            self.sound_manager.play_sound('heal')
             heal_amount = random.randint(lowNum, highNum)
             protagonist.current_health = min(protagonist.max_health, protagonist.current_health + heal_amount)
             print(f"Player heals for {heal_amount} health!")
@@ -59,6 +64,7 @@ class Card:
             protagonist.reduce_action_points(APcost)
 
     def block(self, lowNum, highNum, APcost, protagonist):
+        self.sound_manager.play_sound('block')
         if protagonist.current_action_points >= APcost:
             block_points = random.randint(lowNum, highNum)
             protagonist.block_points += block_points
@@ -68,6 +74,7 @@ class Card:
 
     def draw(self, lowNum, highNum, APcost, protagonist, deck):
         if protagonist.current_action_points >= APcost:
+            self.sound_manager.play_sound('draw')
             draw_number= random.randint(lowNum, highNum)
             deck.draw_cards(draw_number)
             print(f"Player draws {draw_number} cards!")

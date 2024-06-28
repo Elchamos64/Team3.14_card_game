@@ -8,6 +8,8 @@ from Card import Card
 from deck import Deck
 from CardDictionary import cards 
 
+from Sound import Sound
+
 class Main:
     def __init__(self):
         self.WIDTH = 800
@@ -19,6 +21,9 @@ class Main:
         self.actions = ["attack", "heal", "block"]
         self.card = Card
         self.clock = pygame.time
+        sound_manager = Sound()
+        sound_manager.play_music('Start')
+    
 
     def end_turn(self):
         if self.protagonist.current_action_points < self.protagonist.max_action_points:
