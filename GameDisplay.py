@@ -171,10 +171,42 @@ class GameDisplay:
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     mouse_pos = pygame.mouse.get_pos()
                     if play_button_rect.collidepoint(mouse_pos):
-                        return "play"
+                        return "game difficulty"
                     elif quit_button_rect.collidepoint(mouse_pos):
                         pygame.quit()
                         sys.exit()
+    def game_difficulty(self):
+        self.screen.fill((255, 255, 255))  # Clear screen to white
+        pygame.display.set_caption("Game Difficulty")
+        # Render main menu text
+        title_text = self.font.render("Choose the game diffuclty", True, (255, 255, 255))  # Black color
+        easy_button_text = self.font.render("Easy", True, (255, 255, 255))  # Black color
+        medium_button_text = self.font.render("Medium", True, (255, 255, 255))  # Black color
+        hard_button_text = self.font.render("Hard", True, (255, 255, 255))  # Black color
+
+        title_rect = title_text.get_rect(center=(self.width // 2, self.height // 4))
+        easy_button_rect = easy_button_text.get_rect(center=(self.width // 2, self.height // 2))
+        medium_button_rect = medium_button_text.get_rect(center=(self.width // 2, self.height // 2 + 50))
+        hard_button_rect = medium_button_text.get_rect(center=(self.width // 2, self.height // 2 + 50))
+
+        self.screen.blit(title_text, title_rect)
+        self.screen.blit(easy_button_text, easy_button_rect)
+        self.screen.blit(medium_button_text, medium_button_rect)
+        self.screen.blit(hard_button_text, hard_button_rect)
+
+        pygame.display.flip()
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_pos = pygame.mouse.get_pos()
+                    if easy_button_rect.collidepoint(mouse_pos):
+                        return "play"
+                    else:
+                        return "play"
 
 def main():
     # Set up the game display
