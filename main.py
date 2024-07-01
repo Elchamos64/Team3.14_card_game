@@ -20,8 +20,8 @@ class Main:
         self.actions = ["attack", "heal", "block"]
         self.card = Card
         self.clock = pygame.time
-        sound_manager = Sound()
-        sound_manager.play_music('Start')
+        self.sound_manager = Sound()
+        self.sound_manager.play_music('Start')
     
     def end_turn(self):
         if self.protagonist.current_action_points < self.protagonist.max_action_points:
@@ -109,11 +109,14 @@ class Main:
                     mouse_pos = pygame.mouse.get_pos()
                     if easy_button_rect.collidepoint(mouse_pos):
                         self.display.set_background('easy')
+                        self.sound_manager.play_music('Easy')
                         return "play_easy"
                     elif medium_button_rect.collidepoint(mouse_pos):
+                        self.sound_manager.play_music('Medium')
                         self.display.set_background('medium')
                         return "play_medium"
                     elif hard_button_rect.collidepoint(mouse_pos):
+                        self.sound_manager.play_music('Hard')
                         self.display.set_background('hard')
                         return "play_hard"
 
