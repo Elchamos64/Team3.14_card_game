@@ -79,7 +79,7 @@ class Main:
                         sys.exit()
 
     def game_difficulty(self):
-        self.display.screen.fill((255, 255, 255))  # Clear screen to white
+        self.display.clear_screen()
         pygame.display.set_caption("Game Difficulty")
         # Render game difficulty text
         font = pygame.font.SysFont(None, 50)
@@ -108,10 +108,13 @@ class Main:
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     mouse_pos = pygame.mouse.get_pos()
                     if easy_button_rect.collidepoint(mouse_pos):
+                        self.display.set_background('easy')
                         return "play_easy"
                     elif medium_button_rect.collidepoint(mouse_pos):
+                        self.display.set_background('medium')
                         return "play_medium"
                     elif hard_button_rect.collidepoint(mouse_pos):
+                        self.display.set_background('hard')
                         return "play_hard"
 
     def run(self):
