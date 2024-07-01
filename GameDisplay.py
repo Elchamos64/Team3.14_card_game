@@ -144,6 +144,3 @@ class GameDisplay:
 
         # Blit block points text
         self.screen.blit(block_points_text, text_rect)
-
-if __name__ == "__main__":
-    main()
