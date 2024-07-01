@@ -47,7 +47,7 @@ class Main:
         return False
 
     def main_menu(self):
-        self.display.screen.fill((255, 255, 255))  # Clear screen to white
+        self.display.clear_screen()
         pygame.display.set_caption("Main Menu")
         # Render main menu text
         font = pygame.font.SysFont(None, 50)
