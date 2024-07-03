@@ -19,7 +19,7 @@ class Card:
         self.picture = pygame.transform.scale(self.picture, (50, 50))
         self.text = iText
         self.run = iRun
-        self.cardfront = pygame.image.load("Images\Display\CardFront.png")
+        self.cardfront = pygame.image.load("Images/Display/CardFront.png")
         self.cardfront = pygame.transform.scale(self.cardfront, (65, 85))
         self.font = pygame.font.SysFont(None, 12)
         self.nameFont = pygame.font.SysFont(None, 15)
