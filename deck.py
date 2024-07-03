@@ -3,17 +3,40 @@ from Card import Card
 
 class Deck:
     def __init__(self, cards):
-        self.all_cards = [
-            cards["Hide"],
-            cards["Heal Potion"], 
-            cards["Kick"],
-            cards["Kick"],
-            cards["Sword Slash"],
-            cards["Sword Slash"],
+        self.fighter = [
             cards["Shield Block"],
+            cards["Shield Block"], 
+            cards["Sword Slash"],
+            cards["Sword Slash"],
+            cards["Heal Potion"],
+            cards["Kick"],
+            cards["Kick"],
             cards["Investigate"],
         ]
-        self.deck = self.all_cards.copy()
+
+        self.wizard = [
+            cards["Fireball"],
+            cards["Heal Potion"],
+            cards["Heal Potion"],
+            cards["Kick"],
+            cards["Kick"],
+            cards["Eureka!"],
+            cards["Eureka!"],
+            cards["Hide"],
+        ]
+
+        self.ninja = [
+            cards["Shruiken"],
+            cards["Shruiken"],
+            cards["Shruiken"],
+            cards["Hide"],
+            cards["Hide"],
+            cards["Near Miss"],
+            cards["Investigate"],
+            cards["Investigate"],
+        ]
+
+        self.deck = self.wizard
         random.shuffle(self.deck)
         self.hand = []
         self.discard = []
@@ -52,3 +75,7 @@ class Deck:
         for card in self.hand:
             card.display(screen, x, y)
             x += 70
+
+    #Change the deck according to the chosen hero
+    def change_deck(self, choice):
+        self.deck = choice
