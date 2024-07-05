@@ -33,10 +33,9 @@ class Main:
     def player_action(self, action):
         if action == "end_turn":
             self.end_turn()
-        if self.protagonist.current_action_points > 0:
-            match(action):
-                case "0" | "1" | "2" | "3" | "4":
-                    Deck.use_card(self.deck, int(action), self.protagonist, self.enemy)
+        match(action):
+            case "0" | "1" | "2" | "3" | "4":
+                Deck.use_card(self.deck, int(action), self.protagonist, self.enemy)
     
     def check_game_over(self):
         if self.protagonist.current_health <= 0:
