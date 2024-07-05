@@ -40,6 +40,15 @@ class Deck:
         random.shuffle(self.deck)
         self.hand = []
         self.discard = []
+    
+    def initialize_deck1(self):
+        self.deck = self.fighter
+    
+    def initialize_deck2(self):
+        self.deck = self.wizard
+    
+    def initialize_deck3(self):
+        self.deck = self.ninja
 
     def draw_initial_hand(self):
         self.draw_cards(3)  # Draw 3 cards initially
@@ -80,5 +89,12 @@ class Deck:
             x += 70
 
     #Change the deck according to the chosen hero
-    def change_deck(self, choice):
-        self.deck = choice
+    def choose_deck(self, choice):
+        if choice == 'fighter':
+            self.initialize_deck1()
+        elif choice == 'wizard':
+            self.initialize_deck2()
+        elif choice == 'ninja':
+            self.initialize_deck3()
+        else:
+            print("Invalid choice. No changes made.")

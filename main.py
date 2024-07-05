@@ -158,10 +158,13 @@ class Main:
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     mouse_pos = pygame.mouse.get_pos()
                     if fighter_button_rect.collidepoint(mouse_pos):
+                        self.deck.choose_deck('fighter')
                         return "play_fighter"
                     elif ninja_button_rect.collidepoint(mouse_pos):
+                        self.deck.choose_deck('ninja')
                         return "play_ninja"
                     elif wizard_button_rect.collidepoint(mouse_pos):
+                        self.deck.choose_deck('wizard')
                         return "play_wizard"
 
     def run(self):
