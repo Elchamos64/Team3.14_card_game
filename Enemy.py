@@ -16,13 +16,6 @@ class Enemy(GameDisplay):
         self.actions = ["attack", "heal", "block"]
         self.sound_manager = Sound()
 
-
-        # Load enemy image and scale it
-        self.enemy_image = pygame.image.load("Images/Enemies/MilkJugSteve.png") # Replace with your actual enemy image file
-        self.enemy_image = pygame.transform.scale(self.enemy_image, (self.enemy_image.get_width() * 3, self.enemy_image.get_height() * 3)) # Adjust the size as needed
-        self.enemy_image_attack = pygame.image.load("Images/Enemies/MilkJugSteveAttack.png") # Replace with your actual enemy image file
-        self.enemy_image_attack = pygame.transform.scale(self.enemy_image_attack, (self.enemy_image_attack.get_width() * 3, self.enemy_image_attack.get_height() * 3)) # Adjust the size as needed
-
         # Enemy image management
         self.enemies = {
             'easy': self.load_and_scale_image('Images/Enemies/MilkJugSteve.png'),
