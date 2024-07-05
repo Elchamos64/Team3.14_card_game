@@ -47,7 +47,7 @@ class Card:
             enemy.block_points -= damage
             if enemy.block_points < 0:
                 enemy.current_health += enemy.block_points
-                enemy.block_point = 0
+                enemy.block_points = 0
                 if enemy.current_health < 0:
                     enemy.current_health = 0
             print(f"Player attacks for {damage} damage!")
