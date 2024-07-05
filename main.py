@@ -115,14 +115,17 @@ class Main:
                     if easy_button_rect.collidepoint(mouse_pos):
                         self.display.set_background('easy')
                         self.sound_manager.play_music('Easy')
+                        self.enemy.set_enemy('easy')
                         return "deck_option"
                     elif medium_button_rect.collidepoint(mouse_pos):
                         self.sound_manager.play_music('Medium')
                         self.display.set_background('medium')
+                        self.enemy.set_enemy('medium')
                         return "deck_option"
                     elif hard_button_rect.collidepoint(mouse_pos):
                         self.sound_manager.play_music('Hard')
                         self.display.set_background('hard')
+                        self.enemy.set_enemy('hard')
                         return "deck_option"
 
     def deck_option(self):
