@@ -111,14 +111,17 @@ class Main:
                     if easy_button_rect.collidepoint(mouse_pos):
                         self.display.set_background('easy')
                         self.sound_manager.play_music('Easy')
+                        self.enemy.set_enemy('easy')
                         return "play_easy"
                     elif medium_button_rect.collidepoint(mouse_pos):
                         self.sound_manager.play_music('Medium')
                         self.display.set_background('medium')
+                        self.enemy.set_enemy('medium')
                         return "play_medium"
                     elif hard_button_rect.collidepoint(mouse_pos):
                         self.sound_manager.play_music('Hard')
                         self.display.set_background('hard')
+                        self.enemy.set_enemy('hard')
                         return "play_hard"
 
     def run_game(self, difficulty):
