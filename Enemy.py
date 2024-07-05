@@ -23,6 +23,35 @@ class Enemy(GameDisplay):
         self.enemy_image_attack = pygame.image.load("Images/Enemies/MilkJugSteveAttack.png") # Replace with your actual enemy image file
         self.enemy_image_attack = pygame.transform.scale(self.enemy_image_attack, (self.enemy_image_attack.get_width() * 3, self.enemy_image_attack.get_height() * 3)) # Adjust the size as needed
 
+        # Enemy image management
+        self.enemies = {
+            'easy': self.load_and_scale_image('Images/Enemies/MilkJugSteve.png'),
+            'medium': self.load_and_scale_image('Images/Enemies/GenericSlimeGeorge.png'),
+            'hard': self.load_and_scale_image('Images/Enemies/MimicMaurice.png')
+        }
+        self.enemyAttacks = {
+            'easy': self.load_and_scale_image('Images/Enemies/MilkJugSteveAttack.png'),
+            'medium': self.load_and_scale_image('Images/Enemies/GenericSlimeGeorgeAttack.png'),
+            'hard': self.load_and_scale_image('Images/Enemies/MimicMauriceAttack.png')
+        }
+        self.current_enemy = self.enemies['easy']  # Default enemy
+        self.current_enemyAttack = self.enemyAttacks['easy'] 
+
+    def load_and_scale_image(self, image_path):
+        image = pygame.image.load(image_path)
+        return pygame.transform.scale(image, (image.get_width() * 3, image.get_height() * 3))
+    
+    def set_enemy(self, level):
+        if level in self.enemies:
+            self.current_enemy = self.enemies[level]
+        else:
+            raise ValueError(f"No background found for level: {level}")
+        if level in self.enemyAttacks:
+            self.current_enemyAttack = self.enemyAttacks[level]
+        else:
+            raise ValueError(f"No background found for level: {level}")
+
+
     def display_info(self, health_bar_x, health_bar_y, enemy_x, enemy_y, shield_x, shield_y):
         # Draw health bar
         health_bar_width = 200
@@ -39,9 +68,9 @@ class Enemy(GameDisplay):
 
         # Draw the enemy image
         if self.attack == False:
-            self.screen.blit(self.enemy_image, (enemy_x, enemy_y))
+            self.screen.blit(self.current_enemy, (enemy_x, enemy_y))
         else:   
-            self.screen.blit(self.enemy_image_attack, (enemy_x, enemy_y))
+            self.screen.blit(self.current_enemyAttack, (enemy_x, enemy_y))
 
         # Draw the shield and block points
         self.draw_shield_and_block_points(shield_x, shield_y, self.block_points)
