@@ -1,6 +1,6 @@
-import random
 import pygame
 from pygame.locals import *
+import random
 
 # Initialize Pygame
 pygame.init()
@@ -141,5 +141,6 @@ def run_game(screen, difficulty):
     pygame.quit()
 
 # Example usage
-screen = pygame.display.set_mode((800, 600))
-run_game(screen, "intermediate")  # Replace with desired difficulty
+if __name__ == "__main__":
+    screen = pygame.display.set_mode((800, 600))
+    run_game(screen, "intermediate")  # Replace with desired difficulty

@@ -1,6 +1,6 @@
-import pygame
 import sys
-
+import pygame
+from pygame.locals import *
 from GameDisplay import GameDisplay
 from Protagonist import Protagonist
 from Enemy import Enemy
@@ -8,6 +8,7 @@ from Card import Card
 from deck import Deck
 from CardDictionary import cards 
 from Sound import Sound
+
 
 class Main:
     def __init__(self):
@@ -120,7 +121,7 @@ class Main:
                         self.display.set_background('hard')
                         return "play_hard"
 
-    def run(self):
+    def run_game(self, difficulty):
         result = self.main_menu()
         if result == "game_difficulty":
             difficulty = self.game_difficulty()
@@ -152,7 +153,6 @@ class Main:
 
                     # Update display
                     pygame.display.flip()
-
 if __name__ == "__main__":
     game = Main()
-    game.run()
+    game.run_game("play_medium")  # Replace with desired difficulty level
