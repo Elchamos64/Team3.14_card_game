@@ -9,7 +9,6 @@ from deck import Deck
 from CardDictionary import cards 
 from Sound import Sound
 
-
 class Main:
     def __init__(self):
         self.WIDTH = 800
@@ -63,7 +62,7 @@ class Main:
 
         self.display.screen.blit(title_text, title_rect)
         self.display.screen.blit(play_button_text, play_button_rect)
-        # self.display.screen.blit(deck_button_text, deck_button_rect)/
+        # self.display.screen.blit(deck_button_text, deck_button_rect)
         self.display.screen.blit(quit_button_text, quit_button_rect)
 
         pygame.display.flip()
@@ -128,6 +127,41 @@ class Main:
                         self.enemy.set_enemy('hard')
                         return "deck_option"
 
+    def game_over_screen(self, result):
+        self.display.clear_screen()
+        pygame.display.set_caption("Game Over")
+        # Render game over text
+        font = pygame.font.SysFont(None, 50)
+        if result == "enemy_wins":
+            result_text = font.render("Game Over! Enemy wins!", True, (255, 255, 255))
+        else:
+            result_text = font.render("Game Over! Player wins!", True, (255, 255, 255))
+        play_again_text = font.render("Play Again", True, (255, 255, 255))
+        quit_text = font.render("Quit", True, (255, 255, 255))
+
+        result_rect = result_text.get_rect(center=(self.WIDTH // 2, self.HEIGHT // 4))
+        play_again_rect = play_again_text.get_rect(center=(self.WIDTH // 2, self.HEIGHT // 2))
+        quit_rect = quit_text.get_rect(center=(self.WIDTH // 2, self.HEIGHT // 2 + 50))
+
+        self.display.screen.blit(result_text, result_rect)
+        self.display.screen.blit(play_again_text, play_again_rect)
+        self.display.screen.blit(quit_text, quit_rect)
+
+        pygame.display.flip()
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_pos = pygame.mouse.get_pos()
+                    if play_again_rect.collidepoint(mouse_pos):
+                        return "main_menu"
+                    elif quit_rect.collidepoint(mouse_pos):
+                        pygame.quit()
+                        sys.exit()
+
     def deck_option(self):
         self.display.clear_screen()
         pygame.display.set_caption("Deck Option")
@@ -166,41 +200,46 @@ class Main:
                     elif wizard_button_rect.collidepoint(mouse_pos):
                         self.deck.choose_deck('wizard')
                         return "play_wizard"
-
     def run(self):
-        result = self.main_menu()
-        if result == "game_difficulty":
-            difficulty = self.game_difficulty()
-            if difficulty == "deck_option":
-                deck_choice = self.deck_option()
-                if deck_choice in ["play_fighter", "play_ninja", "play_wizard"]:
-                    running = True
-                    self.deck.draw_initial_hand()
-                    self.deck.draw_initial_hand()
-                    while running:
-                        self.display.clear_screen()
+        while True:
+            result = self.main_menu()
+            if result == "game_difficulty":
+                difficulty = self.game_difficulty()
+                if difficulty == "deck_option":
+                    deck_choice = self.deck_option()
+                    if deck_choice in ["play_fighter", "play_ninja", "play_wizard"]:
+                        running = True
+                        self.deck.draw_initial_hand()
+                        self.deck.draw_initial_hand()
+                        game_over_result = False
+                        while running:
+                            self.display.clear_screen()
 
-                        # Handle events
-                        action = self.display.handle_events()
-                        if action:  # If an action was returned
-                            self.player_action(action)
+                            # Handle events
+                            action = self.display.handle_events()
+                            if action:  # If an action was returned
+                                self.player_action(action)
 
-                        # Check for game over
-                        if self.check_game_over():
-                            running = False
+                            # Check for game over
+                            game_over_result = self.check_game_over()
+                            if game_over_result:
+                                running = False
+                                end_result = self.game_over_screen(game_over_result)
+                                if end_result == "main_menu":
+                                    running = False  # Break out of the current loop to return to the main menu
 
-                        # Display information for both protagonist and enemy
-                        self.protagonist.display_info(40, 450, 20, 520, 70, 515)  # Updated positions for protagonist's health bar, action points, and shield
-                        self.enemy.display_info(300, 10, 330, 80, 380, 18)  # Updated positions for enemy's health bar, enemy image, and shield
-                        
-                        # Draw card areas
-                        self.display.draw_card_areas(self.deck)
+                            # Display information for both protagonist and enemy
+                            self.protagonist.display_info(40, 450, 20, 520, 70, 515)  # Updated positions for protagonist's health bar, action points, and shield
+                            self.enemy.display_info(300, 10, 330, 80, 380, 18)  # Updated positions for enemy's health bar, enemy image, and shield
+                            
+                            # Draw card areas
+                            self.display.draw_card_areas(self.deck)
 
-                        # Draw buttons
-                        self.display.draw_button_areas()
+                            # Draw buttons
+                            self.display.draw_button_areas()
 
-                        # Update display
-                        pygame.display.flip()
+                            # Update display
+                            pygame.display.flip()
 
 if __name__ == "__main__":
     game = Main()

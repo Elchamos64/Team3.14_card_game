@@ -59,8 +59,8 @@ class GameDisplay:
             'easy': self.load_and_scale_image('Images/Display/Easy.png'),
             'medium': self.load_and_scale_image('Images/Display/Medium.png'),
             'hard' : self.load_and_scale_image('Images/Display/Hard.png'),
-            'victory' : self.load_and_scale_image('Images/Display/victory.jpg'),
-            'death' : self.load_and_scale_image('Images/Display/death.jpg')
+            'victory' : self.load_and_scale_image('Images/Display/victory.png'),
+            'death' : self.load_and_scale_image('Images/Display/dead.png')
         }
         self.current_background = self.backgrounds['menu']  # Default background
 
