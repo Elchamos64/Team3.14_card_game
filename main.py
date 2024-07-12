@@ -38,16 +38,24 @@ class Main:
     
     def check_game_over(self):
         if self.protagonist.current_health <= 0:
+            self.display.set_background('death')
+            self.sound_manager.play_music('Death')
             print("Game Over! Enemy wins!")
             return True
+
         elif self.enemy.current_health <= 0:
             print("Game Over! Player wins!")
+            self.display.set_background('victory')
+            self.sound_manager.play_music('Victory')
             return True
-        return False
+        
+        else:
+            return False
 
     def main_menu(self):
+        self.sound_manager.play_music('Start')
+        self.display.set_background('menu')
         self.display.clear_screen()
-        pygame.display.set_caption("Main Menu")
         # Render main menu text
         font = pygame.font.SysFont(None, 50)
         title_text = font.render("Main Menu", True, (255, 255, 255))  # white color
@@ -128,6 +136,9 @@ class Main:
                         return "deck_option"
 
     def game_over_screen(self, result):
+        self.deck.deck=[]
+        self.deck.hand=[]
+        self.deck.discard=[]
         self.display.clear_screen()
         pygame.display.set_caption("Game Over")
         # Render game over text
@@ -157,6 +168,14 @@ class Main:
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     mouse_pos = pygame.mouse.get_pos()
                     if play_again_rect.collidepoint(mouse_pos):
+                        self.protagonist.max_health = 100
+                        self.protagonist.current_health = 100
+                        self.protagonist.current_action_points = 5
+                        self.protagonist.max_action_points = 5
+                        self.protagonist.block_points = 0 
+                        self.enemy.max_health = 50
+                        self.enemy.current_health = 50
+                        self.enemy.block_points = 25
                         return "main_menu"
                     elif quit_rect.collidepoint(mouse_pos):
                         pygame.quit()
