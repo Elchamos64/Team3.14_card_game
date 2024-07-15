@@ -6,8 +6,8 @@ from Sound import Sound  # Assuming this is your sound management class
 class Enemy(GameDisplay):
     def __init__(self, width, height):
         super().__init__(width, height)
-        self.max_health = 50  # Increased max health
-        self.current_health = 50
+        self.max_health = 150  # Increased max health
+        self.current_health = 150
         self.block_points = 30  # Increased block points
         self.attack = False
         self.actions = ["attack", "heal", "block"]
@@ -50,8 +50,8 @@ class Enemy(GameDisplay):
         super().draw_health_bar(self.current_health, self.max_health, health_bar_x, health_bar_y, health_bar_width, health_bar_height)
 
         health_text = self.font.render(f"{self.current_health}/{self.max_health}", True, (0, 0, 0))
-        health_text_x = health_bar_x + (health_bar_width - health_text.get_width()) // 2
-        health_text_y = health_bar_y + (health_bar_height - health_text.get_height()) // 2
+        health_text_x = health_bar_x + (health_bar_width - health_text.get_width()) // 9
+        health_text_y = health_bar_y + (health_bar_height - health_text.get_height()) * 4
         self.screen.blit(health_text, (health_text_x, health_text_y))
 
         if self.attack:
