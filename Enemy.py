@@ -2,17 +2,17 @@ import pygame
 import random
 from GameDisplay import GameDisplay  # Assuming this is your display class
 from Sound import Sound  # Assuming this is your sound management class
-from Protagonist import Protagonist  # Assuming this is your protagonist class
 
 class Enemy(GameDisplay):
     def __init__(self, width, height):
         super().__init__(width, height)
-        self.max_health = 150  # Increased max health
-        self.current_health = 150
+        self.max_health = 50  # Increased max health
+        self.current_health = 50
         self.block_points = 30  # Increased block points
         self.attack = False
         self.actions = ["attack", "heal", "block"]
         self.sound_manager = Sound()
+        self.current_level = 'easy'
 
         # Images for different enemies and their attacks
         self.enemies = {
@@ -25,17 +25,6 @@ class Enemy(GameDisplay):
             'medium': self.load_and_scale_image('Images/Enemies/GenericSlimeGeorgeAttack.png'),
             'hard': self.load_and_scale_image('Images/Enemies/MimicMauriceAttack.png')
         }
-
-        # Decks for different classes (wizard, ninja, fighter)
-        self.decks = {
-            'wizard': {'attack': 10, 'heal': 5, 'block': 5},  # Adjusted action weights for wizard
-            'ninja': {'attack': 15, 'heal': 3, 'block': 7},   # Adjusted action weights for ninja
-            'fighter': {'attack': 5, 'heal': 10, 'block': 10} # Adjusted action weights for fighter
-        }
-
-        # Default level and class
-        self.current_level = 'hard'  # Start with hard level
-        self.current_class = 'wizard'
 
         # Set initial enemy and attack images
         self.set_enemy(self.current_level)
@@ -55,12 +44,6 @@ class Enemy(GameDisplay):
         else:
             raise ValueError(f"No attack image found for level: {level}")
 
-    def set_class(self, class_name):
-        if class_name in self.decks:
-            self.current_class = class_name
-        else:
-            raise ValueError(f"No deck found for class: {class_name}")
-
     def display_info(self, health_bar_x, health_bar_y, enemy_x, enemy_y, shield_x, shield_y):
         health_bar_width = 200
         health_bar_height = 20
@@ -79,8 +62,7 @@ class Enemy(GameDisplay):
         self.draw_shield_and_block_points(shield_x, shield_y, self.block_points)
 
     def enemy_action(self, clock, protag):
-        action_weights = self.decks[self.current_class]
-        action = random.choices(list(action_weights.keys()), weights=list(action_weights.values()), k=1)[0]
+        action = random.choice(self.actions)
 
         if action == "attack":
             self.attack = True
@@ -108,40 +90,3 @@ class Enemy(GameDisplay):
 
     def update(self, clock, protag):
         self.enemy_action(clock, protag)
-
-        # Additional logic for updating enemy state goes here
-
-# Example usage:
-# Initialize your game and create an instance of Enemy
-pygame.init()
-screen_width = 800
-screen_height = 600
-game_display = GameDisplay(screen_width, screen_height)
-enemy = Enemy(screen_width, screen_height)
-
-# Set the enemy level (easy, medium, hard)
-enemy.set_enemy('hard')  # Set to hard level
-
-# Set the enemy class (wizard, ninja, fighter)
-enemy.set_class('ninja')  # Example class
-
-# Game loop
-running = True
-clock = pygame.time.Clock()
-protagonist = Protagonist()  # Assuming you have a Protagonist class
-
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-    # Update game entities
-    enemy.update(clock, protagonist)
-
-    # Render game entities
-    game_display.display_info(10, 10, 100, 100, 10, 50)  # Example positions
-    pygame.display.flip()
-    clock.tick(30)
-
-pygame.quit()
-SystemError.exit()
