@@ -42,12 +42,15 @@ class Deck:
         self.discard = []
     
     def initialize_deck1(self):
+        self.deck=[]
         self.deck = self.fighter
     
     def initialize_deck2(self):
+        self.deck=[]
         self.deck = self.wizard
     
     def initialize_deck3(self):
+        self.deck=[]
         self.deck = self.ninja
 
     def draw_initial_hand(self):

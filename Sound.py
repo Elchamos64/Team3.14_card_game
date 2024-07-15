@@ -21,6 +21,8 @@ class Sound:
             'Easy': 'Sound/Easy.wav',
             'Medium': 'Sound/Medium.wav',
             'Hard': 'Sound/Hard.wav',
+            'Victory': 'Sound/Victory.wav',
+            'Death' : 'Sound/Death.wav'
             # Add more music tracks as needed
         }
 
