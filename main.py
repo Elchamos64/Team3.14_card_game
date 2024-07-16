@@ -59,8 +59,10 @@ class Main:
         # Render main menu text
         font = pygame.font.SysFont(None, 50)
         title_text = font.render("Main Menu", True, (255, 255, 255))  # white color
-        play_button_text = font.render("Play", True, (255, 255, 255))  # white color
-        quit_button_text = font.render("Quit", True, (255, 255, 255))  # white color
+        play_button_text = pygame.image.load("Images/Display/Play.png")
+        play_button_text = pygame.transform.scale(play_button_text, (play_button_text.get_width() * 4, play_button_text.get_height() * 4))
+        quit_button_text = pygame.image.load("Images/Display/Quit.png")
+        quit_button_text = pygame.transform.scale(quit_button_text, (quit_button_text.get_width() * 4, quit_button_text.get_height() * 4))
         # deck_button_text = font.render("Deck", True, (255, 255, 255))  # white color
 
         title_rect = title_text.get_rect(center=(self.WIDTH // 2, self.HEIGHT // 4))
@@ -96,9 +98,12 @@ class Main:
         # Render game difficulty text
         font = pygame.font.SysFont(None, 50)
         title_text = font.render("Choose the game difficulty", True, (255, 255, 255))  # white color
-        easy_button_text = font.render("Easy", True, (255, 255, 255))  # white color
-        medium_button_text = font.render("Medium", True, (255, 255, 255))  # white color
-        hard_button_text = font.render("Hard", True, (255, 255, 255))  # white color
+        easy_button_text = pygame.image.load("Images/Display/EasyButton.png")
+        easy_button_text = pygame.transform.scale(easy_button_text, (easy_button_text.get_width() * 4, easy_button_text.get_height() * 4))
+        medium_button_text = pygame.image.load("Images/Display/MediumButton.png")
+        medium_button_text = pygame.transform.scale(medium_button_text, (medium_button_text.get_width() * 4, medium_button_text.get_height() * 4))
+        hard_button_text = pygame.image.load("Images/Display/HardButton.png")
+        hard_button_text = pygame.transform.scale(hard_button_text, (hard_button_text.get_width() * 4,hard_button_text.get_height() * 4))
 
         title_rect = title_text.get_rect(center=(self.WIDTH // 2, self.HEIGHT // 4))
         easy_button_rect = easy_button_text.get_rect(center=(self.WIDTH // 2, self.HEIGHT // 2))
@@ -147,8 +152,10 @@ class Main:
             result_text = font.render("Game Over! Enemy wins!", True, (255, 255, 255))
         else:
             result_text = font.render("Game Over! Player wins!", True, (255, 255, 255))
-        play_again_text = font.render("Play Again", True, (255, 255, 255))
-        quit_text = font.render("Quit", True, (255, 255, 255))
+        play_again_text = pygame.image.load("Images/Display/Play.png")
+        play_again_text = pygame.transform.scale(play_again_text, (play_again_text.get_width() * 4, play_again_text.get_height() * 4))
+        quit_text = pygame.image.load("Images/Display/Quit.png")
+        quit_text = pygame.transform.scale(quit_text, (quit_text.get_width() * 4, quit_text.get_height() * 4))
 
         result_rect = result_text.get_rect(center=(self.WIDTH // 2, self.HEIGHT // 4))
         play_again_rect = play_again_text.get_rect(center=(self.WIDTH // 2, self.HEIGHT // 2))
@@ -187,9 +194,12 @@ class Main:
         # Render deck option text
         font = pygame.font.SysFont(None, 50)
         title_text = font.render("Choose the deck", True, (255, 255, 255))  # white color
-        fighter_button_text = font.render("Fighter", True, (255, 255, 255))  # white color
-        ninja_button_text = font.render("Ninja", True, (255, 255, 255))  # white color
-        wizard_button_text = font.render("Wizard", True, (255, 255, 255))  # white color
+        fighter_button_text = pygame.image.load("Images/Display/FighterButton.png")
+        fighter_button_text = pygame.transform.scale(fighter_button_text, (fighter_button_text.get_width() * 4, fighter_button_text.get_height() * 4))
+        ninja_button_text = pygame.image.load("Images/Display/NinjaButton.png")
+        ninja_button_text = pygame.transform.scale(ninja_button_text, (ninja_button_text.get_width() * 4, ninja_button_text.get_height() * 4))
+        wizard_button_text = pygame.image.load("Images/Display/MagusButton.png")
+        wizard_button_text = pygame.transform.scale(wizard_button_text, (wizard_button_text.get_width() * 4, wizard_button_text.get_height() * 4))
 
         title_rect = title_text.get_rect(center=(self.WIDTH // 2, self.HEIGHT // 4))
         fighter_button_rect = fighter_button_text.get_rect(center=(self.WIDTH // 2, self.HEIGHT // 2))
