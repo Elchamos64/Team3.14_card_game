@@ -36,22 +36,18 @@ class Deck:
             cards["Investigate"],
         ]
 
-        self.deck = self.wizard
-        random.shuffle(self.deck)
+        self.deck = []
         self.hand = []
         self.discard = []
     
     def initialize_deck1(self):
-        self.deck=[]
-        self.deck = self.fighter
+        self.deck = self.fighter.copy()
     
     def initialize_deck2(self):
-        self.deck=[]
-        self.deck = self.wizard
+        self.deck = self.wizard.copy()
     
     def initialize_deck3(self):
-        self.deck=[]
-        self.deck = self.ninja
+        self.deck = self.ninja.copy()
 
     def draw_initial_hand(self):
         self.draw_cards(3)  # Draw 3 cards initially
@@ -95,9 +91,12 @@ class Deck:
     def choose_deck(self, choice):
         if choice == 'fighter':
             self.initialize_deck1()
+            print('fighter')
         elif choice == 'wizard':
             self.initialize_deck2()
+            print('wizard')
         elif choice == 'ninja':
             self.initialize_deck3()
+            print('ninja')
         else:
             print("Invalid choice. No changes made.")

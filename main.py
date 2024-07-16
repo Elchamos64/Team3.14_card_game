@@ -136,7 +136,6 @@ class Main:
                         return "deck_option"
 
     def game_over_screen(self, result):
-        self.deck.deck=[]
         self.deck.hand=[]
         self.deck.discard=[]
         self.display.clear_screen()
