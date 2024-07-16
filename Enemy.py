@@ -7,7 +7,7 @@ class Enemy(GameDisplay):
     def __init__(self, width, height):
         super().__init__(width, height)
         self.max_health = 150  # Increased max health
-        self.current_health = 150
+        self.current_health = 100
         self.block_points = 30  # Increased block points
         self.attack = False
         self.actions = ["attack", "heal", "block"]
@@ -61,32 +61,84 @@ class Enemy(GameDisplay):
 
         self.draw_shield_and_block_points(shield_x, shield_y, self.block_points)
 
+    
     def enemy_action(self, clock, protag):
         action = random.choice(self.actions)
 
-        if action == "attack":
-            self.attack = True
-            damage = random.randint(20, 30)  # Increased damage
-            protag.block_points -= damage
-            if protag.block_points < 0:
-                protag.current_health += protag.block_points
-                protag.block_points = 0
-                if protag.current_health < 0:
-                    protag.current_health = 0
-                print(f"Enemy attacks for {damage} damage!")
-            self.sound_manager.play_sound('enemy_attack')
+        if self.current_level == 'easy':
+            if action == "attack":
+                self.attack = True
+                damage = random.randint(20, 30)  # Increased damage
+                protag.block_points -= damage
+                if protag.block_points < 0:
+                    protag.current_health += protag.block_points
+                    protag.block_points = 0
+                    if protag.current_health < 0:
+                        protag.current_health = 0
+                    print(f"Enemy attacks for {damage} damage!")
+                self.sound_manager.play_sound('enemy_attack')
 
-        elif action == "heal":
-            self.attack = False
-            heal_amount = random.randint(5, 10)  # Reduced healing amount
-            self.current_health = min(self.max_health, self.current_health + heal_amount)
-            print(f"Enemy heals for {heal_amount} health!")
+            elif action == "heal":
+                self.attack = False
+                heal_amount = random.randint(5, 10)  # Reduced healing amount
+                self.current_health = min(self.max_health, self.current_health + heal_amount)
+                print(f"Enemy heals for {heal_amount} health!")
 
-        elif action == "block":
-            self.attack = False
-            block_points = random.randint(2, 10)  # Reduced block points gain
-            self.block_points += block_points
-            print(f"Enemy blocks, gaining {block_points} block points!")
+            elif action == "block":
+                self.attack = False
+                block_points = random.randint(2, 10)  # Reduced block points gain
+                self.block_points += block_points
+                print(f"Enemy blocks, gaining {block_points} block points!")
+
+        elif self.current_level == 'medium':
+            if action == "attack":
+                self.attack = True
+                damage = random.randint(25, 35)  # Adjusted damage for medium level
+                protag.block_points -= damage
+                if protag.block_points < 0:
+                    protag.current_health += protag.block_points
+                    protag.block_points = 0
+                    if protag.current_health < 0:
+                        protag.current_health = 0
+                    print(f"Medium enemy attacks for {damage} damage!")
+                self.sound_manager.play_sound('enemy_attack')
+
+            elif action == "heal":
+                self.attack = False
+                heal_amount = random.randint(8, 12)  # Adjusted healing amount for medium level
+                self.current_health = min(self.max_health, self.current_health + heal_amount)
+                print(f"Medium enemy heals for {heal_amount} health!")
+
+            elif action == "block":
+                self.attack = False
+                block_points = random.randint(3, 12)  # Adjusted block points gain for medium level
+                self.block_points += block_points
+                print(f"Medium enemy blocks, gaining {block_points} block points!")
+
+        elif self.current_level == 'hard':
+            if action == "attack":
+                self.attack = True
+                damage = random.randint(30, 40)  # Increased damage for hard level
+                protag.block_points -= damage
+                if protag.block_points < 0:
+                    protag.current_health += protag.block_points
+                    protag.block_points = 0
+                    if protag.current_health < 0:
+                        protag.current_health = 0
+                    print(f"Hard enemy attacks for {damage} damage!")
+                self.sound_manager.play_sound('enemy_attack')
+
+            elif action == "heal":
+                self.attack = False
+                heal_amount = random.randint(10, 15)  # Adjusted healing amount for hard level
+                self.current_health = min(self.max_health, self.current_health + heal_amount)
+                print(f"Hard enemy heals for {heal_amount} health!")
+
+            elif action == "block":
+                self.attack = False
+                block_points = random.randint(5, 15)  # Adjusted block points gain for hard level
+                self.block_points += block_points
+                print(f"Hard enemy blocks, gaining {block_points} block points!")
 
     def update(self, clock, protag):
         self.enemy_action(clock, protag)
