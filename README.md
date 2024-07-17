@@ -1,32 +1,28 @@
 # Overview
 
-{Important!  Do not say in this section that this is college assignment.}
-
-{Provide a description of your team project.  Describe how to use the software.}
-
-{If this is an online class, then provide a link to your YouTube demonstration.  It should be a 4-5 minute demo of the software running and a walkthrough of the code.}
-
 [Software Demo Video](http://youtube.link.goes.here)
 
 # Development Environment
 
-{Describe the tools that you used to develop the software}
+Visual Studio code was used to develop the enviroment
 
-{Describe the programming language that you used and any libraries.}
+The language used was python as well the library that was used was Pygame for the game. 
 
 # Collaborators
 
-{Provide a list of everyone on your team}
+Jack Hammond- Project Manager (Trello)
+Oscar Ramos - Configuration Manager(Git)
+Cayden Lords -  I AM THE CAPTAIN… of Graphic Design
+Josh Hart - Team Leader
+Alex Myers - Quality Assurance Manager (AI devloper)
 
 # Useful Websites
 
-{Make a list of websites that you found helpful in this project}
-* [Web Site Name](http://url.link.goes.here)
-* [Web Site Name](http://url.link.goes.here)
+* [[Pygame examples]((https://github.com/pygame/pygame/tree/main/examples))
+* * [Geeks for Geeks](https://www.geeksforgeeks.org/pygame-tutorial/)
 
 # Future Work
 
-{Make a list of things that you need to fix, improve, and add in the future.}
-* Item 1
-* Item 2
-* Item 3
+* We would like to add more decks in the future to be able to have more possibilty for fun!
+* Do a revamp of the AI and make it to where it could play the full game by itself where its a computer against itself.
+* Add better graphics to the cards and take more time to make it even better of a product. 
