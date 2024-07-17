@@ -11,10 +11,15 @@ The language used was python as well the library that was used was Pygame for th
 # Collaborators
 
 Jack Hammond- Project Manager (Trello)
+
 Oscar Ramos - Configuration Manager(Git)
+
 Cayden Lords -  I AM THE CAPTAIN… of Graphic Design
+
 Josh Hart - Team Leader
+
 Alex Myers - Quality Assurance Manager (AI devloper)
+
 
 # Useful Websites
 
