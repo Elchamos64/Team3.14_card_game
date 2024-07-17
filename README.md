@@ -23,7 +23,7 @@ Alex Myers - Quality Assurance Manager (AI devloper)
 
 # Useful Websites
 
-* [[Pygame examples]((https://github.com/pygame/pygame/tree/main/examples))
+* [[Pygame examples](https://github.com/pygame/pygame/tree/main/examples))
 * * [Geeks for Geeks](https://www.geeksforgeeks.org/pygame-tutorial/)
 
 # Future Work
